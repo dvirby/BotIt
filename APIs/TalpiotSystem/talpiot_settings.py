@@ -72,7 +72,7 @@ class TalpiotSettings:
                  database_settings: TalpiotDatabaseSettings = TalpiotDatabaseSettings(
                      server_url="localhost",
                      server_port=27017,
-                     use_ssl=True,
+                     use_ssl=False,
                      ssl_server_certificate="",
                      authentication_table='admin'  # todo change name
                  ),

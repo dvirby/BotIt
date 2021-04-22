@@ -42,7 +42,7 @@ class Vault:
         #  Get real db name
         db_name = alias
         if alias == MONGOENGINE_DEFAULT_CONNECTION_NAME:
-            db_name = "talpibot_main"
+            db_name = "admin"
 
         #  Connect to the DB
         TBLogger.info("Connecting to db `%s` [%s]..." % (alias, db_name))
