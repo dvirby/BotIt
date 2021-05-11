@@ -1,3 +1,3 @@
-<img src="./other/logo.png">
+<img src="./other/logo2.png">
 
 
