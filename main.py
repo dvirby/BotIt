@@ -1,7 +1,7 @@
 from BotFramework import *
 import GettingStarted.configuration_setup as ConfigSetup
 import settings
-from APIs.TalpiotAPIs import User
+from APIs.OtherAPIs import User
 
 
 def get_bot_manager() -> BotManager:

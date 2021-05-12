@@ -4,9 +4,8 @@ from BotFramework.View.view import View
 from BotFramework.session import Session
 from BotFramework.ui.ui import UI
 from APIs.ExternalAPIs import *
-from APIs.TalpiotAPIs.User.user import User
+from APIs.OtherAPIs.DatabaseRelated.User.user import User
 from Features.library.Logic.Book import Book
-from google.oauth2.credentials import Credentials
 
 
 class feature_test17321(BotFeature):

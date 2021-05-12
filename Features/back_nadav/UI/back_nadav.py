@@ -1,12 +1,9 @@
-from BotFramework import *
 from APIs.ExternalAPIs import *
-from APIs.TalpiotAPIs import *
-from APIs.Database import *
 from BotFramework.Feature.bot_feature import BotFeature
 from BotFramework.View.view import View
 from BotFramework.session import Session
-from BotFramework.ui.ui import UI, Button
-from APIs.TalpiotAPIs.User.user import User
+from BotFramework.ui.ui import UI
+from APIs.OtherAPIs.DatabaseRelated.User.user import User
 import covid19_data
 
 hisID = ""
@@ -47,15 +44,6 @@ class back_nadav(BotFeature):
         self.ui.create_text_view(session, "מספר המתים בישראל כרגע הוא:" + str(israel.deaths)).draw()
         self.ui.create_text_view(session, "מספר המחלימים בישראל כרגע הוא:" + str(israel.recovered)).draw()
 
-    def func4(self, session, usr_string):
-        global hisSchool
-        hisSchool = usr_string
-        mashov = MashovAPI(hisID, password=hisPwd, schoolName=hisSchool)
-        mashov.login()
-        if mashov.isLoggedIn == True:
-            self.ui.create_text_view(session, "מחובר!").draw()
-            self.ui.create_text_view(session, str(mashov.getClasses())).draw()
-            print(mashov.getClasses())
 
 
 

@@ -2,7 +2,7 @@ from mongoengine import *
 
 from APIs.ExternalAPIs import GoogleCalendar
 from Features.Shagmach.Classrooms.DBModels.classroom import Classroom
-from APIs.TalpiotAPIs.User.user import User
+from APIs.OtherAPIs.DatabaseRelated.User.user import User
 from APIs.ExternalAPIs.GoogleCalendar.calendar_event import *
 
 HEBREW_DATE = "תאריך"

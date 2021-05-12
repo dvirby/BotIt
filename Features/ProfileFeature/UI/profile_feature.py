@@ -1,7 +1,7 @@
 from BotFramework import *
 from APIs.ExternalAPIs import *
 from Features.ProfileFeature.Logic.profile_logic import ProfileLogic
-from APIs.TalpiotAPIs import *
+from APIs.OtherAPIs import *
 
 
 class ProfileFeature(BotFeature):

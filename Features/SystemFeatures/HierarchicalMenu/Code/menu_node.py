@@ -7,7 +7,7 @@ from BotFramework.Feature.FeatureSettings import FeatureSettings
 from BotFramework.Feature.feature_loader import FeatureLoader
 from BotFramework.ui.ui import UI
 from Features.SystemFeatures.HierarchicalMenu.Code.helper import get_abs_dirs_in_dir
-from APIs.TalpiotSystem import Vault, TBLogger
+from APIs.System import Vault, BotItLogger
 
 
 class MenuNode:
@@ -29,7 +29,7 @@ class MenuNode:
 
         if feature_settings is None:
             self.is_valid = False
-            TBLogger.error(f'No feature settings in: {dir_path}')
+            BotItLogger.error(f'No feature settings in: {dir_path}')
             return
 
         self.display_name = feature_settings.display_name
@@ -71,12 +71,12 @@ class MenuNode:
                 try:
                     return _class(ui)
                 except:
-                    TBLogger.error(f'Cannot load class {_class}. Got exception.')
-                    TBLogger.error(f'Traceback: {traceback.print_exc()}')
+                    BotItLogger.error(f'Cannot load class {_class}. Got exception.')
+                    BotItLogger.error(f'Traceback: {traceback.print_exc()}')
                     return None
             except:
-                TBLogger.error(f"error loading feature {feature_settings.display_name}")
-                TBLogger.error(f'Traceback: {traceback.print_exc()}')
+                BotItLogger.error(f"error loading feature {feature_settings.display_name}")
+                BotItLogger.error(f'Traceback: {traceback.print_exc()}')
                 return None
         #  If it is a feature category, load it
         elif feature_settings.type == FeatureType.FEATURE_CATEGORY:

@@ -8,9 +8,9 @@ class CalendarEvent:
                  start_time: Union[datetime, date],
                  end_time: Union[datetime, date],
                  location: Optional[str],
-                 attendees: Optional[list]=None,
-                 creator: dict=None,
-                 calendar_event_id: str=None):
+                 attendees: Optional[list] = None,
+                 creator: dict = None,
+                 calendar_event_id: str = None):
         """
         Creates a new CalendarEvent
         :param title:
@@ -53,6 +53,7 @@ class CalendarEvent:
 
     @staticmethod
     def _get_date_dict(obj: Union[datetime, date]) -> dict:
+        """get the data dict"""
         if type(obj) is datetime:
             return {'dateTime': iso_date_format(obj)}
 

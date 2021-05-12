@@ -2,13 +2,11 @@ from BotFramework import *
 from APIs.ExternalAPIs import *
 from Features.FeatureFinder.Logic.feature_finder_logic import FeatureFinderLogic
 from Features.SystemFeatures.HierarchicalMenu.Code.menu_node import MenuNode
-from APIs.TalpiotAPIs import *
-from APIs.Database import *
 from BotFramework.Feature.bot_feature import BotFeature
 from BotFramework.View.view import View
 from BotFramework.session import Session
-from BotFramework.ui.ui import UI, Button
-from APIs.TalpiotAPIs.User.user import User
+from BotFramework.ui.ui import UI
+from APIs.OtherAPIs.DatabaseRelated.User.user import User
 
 from Features.SystemFeatures.HierarchicalMenu.Code.hierarchical_menu import HierarchicalMenu
 

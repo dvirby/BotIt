@@ -1,6 +1,6 @@
 from APIs.ExternalAPIs.Mail.system_mail_client import MailClient
-from APIs.TalpiotAPIs.User.user import User
-from APIs.TalpiotAPIs.User.who_is import get_user_by_secret_code
+from APIs.OtherAPIs.DatabaseRelated.User.user import User
+from APIs.OtherAPIs.DatabaseRelated.User.who_is import get_user_by_secret_code
 
 
 class SecretCodeManager:
@@ -87,7 +87,7 @@ def test_class():
 
 if __name__ == '__main__':
     from settings import load_settings
-    from Talpiot.TalpiotSystem import Vault
+    from APIs.System import Vault
 
     load_settings()
     Vault.get_vault().connect_to_db()

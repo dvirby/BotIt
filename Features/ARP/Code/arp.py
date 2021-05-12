@@ -1,11 +1,9 @@
-from typing import List
-
 from BotFramework import ClosestNameActivity
 from BotFramework.Feature.bot_feature import BotFeature
 from BotFramework.View.view import View
 from BotFramework.session import Session
-from BotFramework.ui.ui import UI, Button
-from APIs.TalpiotAPIs.User.user import User
+from BotFramework.ui.ui import UI
+from APIs.OtherAPIs.DatabaseRelated.User.user import User
 
 
 class ARP(BotFeature):

@@ -1,9 +1,8 @@
 import datetime
 from mongoengine import *
 
-from APIs.ExternalAPIs.GoogleCalendar.calendar_event import CalendarEvent
-from APIs.TalpiotAPIs.Classroom.classroom import Classroom
-from APIs.TalpiotAPIs.User.user import User
+from APIs.OtherAPIs.DatabaseRelated.Classroom.classroom import Classroom
+from APIs.OtherAPIs.DatabaseRelated.User.user import User
 
 HEBREW_DATE = "תאריך"
 HEBREW_START_HOUR = "שעת התחלה"

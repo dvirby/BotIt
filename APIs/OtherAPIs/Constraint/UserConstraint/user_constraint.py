@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from APIs.TalpiotAPIs.User.user import User
+from APIs.OtherAPIs.DatabaseRelated.User.user import User
 
 
 class UserConstraint(ABC):

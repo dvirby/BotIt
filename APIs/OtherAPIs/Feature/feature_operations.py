@@ -1,4 +1,4 @@
-from APIs.TalpiotAPIs.Feature.feature import Feature
+from APIs.OtherAPIs.Feature.feature import Feature
 
 
 def get_features():

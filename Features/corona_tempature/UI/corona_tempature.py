@@ -1,15 +1,13 @@
 import pickle
 import threading
 
-from BotFramework import *
 from BotFramework.Activity.FormActivity.form_activity import FormActivity
 from APIs.ExternalAPIs import *
-from APIs.TalpiotAPIs import *
 from BotFramework.Feature.bot_feature import BotFeature
 from BotFramework.View.view import View
 from BotFramework.session import Session
-from BotFramework.ui.ui import UI, Button
-from APIs.TalpiotAPIs.User.user import User
+from BotFramework.ui.ui import UI
+from APIs.OtherAPIs.DatabaseRelated.User.user import User
 
 from Features.corona_tempature.Logic.data_view import CoronaForm
 

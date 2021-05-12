@@ -6,7 +6,7 @@ from BotFramework.ui.ui import UI
 import rstr
 from BotFramework.session import Session
 from APIs.ExternalAPIs.Mail.system_mail_client import MailClient
-from APIs.TalpiotSystem import *
+from APIs.System import *
 
 CODE_REGEX = r"^[a-zA-Z0-9]{8}$"
 ERROR_OCCURRED_USER = "הפיצ'ר נתקל בשגיאה." + "\n" + "שם הפיצ'ר: %s" + "\n" + "מזהה שגיאה:" + " #%s"
@@ -108,7 +108,7 @@ def log_all_exceptions(function_to_call: Callable[[], None], session: Session, u
         else:
             ui.summarize_and_close(session, [ui.create_text_view(session, report.get_user_readable_text())])
 
-        if TalpiotSettings.get().running_mode == TalpiotOperationMode.PRODUCTION:
+        if Settings.get().running_mode == OperationMode.PRODUCTION:
             upload_report_to_git_issues(report)
 
         print(f'[-] Got Exception: {report.get_admin_plaintext()}')
@@ -119,8 +119,8 @@ def log_all_exceptions(function_to_call: Callable[[], None], session: Session, u
 
 def upload_report_to_git_issues(report):
     try:
-        TalpiBotGit.get().create_new_issue(
-            issue_object=TalpiBotGitIssue(
+        BotItGit.get().create_new_issue(
+            issue_object=BotItGitIssue(
                 title=f'EReport: {report.report_id}',
                 description=report.get_admin_html_text(),
                 labels=['ERROR REPORT', report.session.user.name],

@@ -1,7 +1,7 @@
 from __future__ import annotations
 import os
 from googleapiclient.http import MediaFileUpload
-from APIs.ExternalAPIs import TalpiotSettings
+from APIs.ExternalAPIs import Settings
 from APIs.ExternalAPIs.WorkerPool.pool import Pool
 from APIs.ExternalAPIs.WorkerPool.pooled_worker import PooledWorker
 
@@ -34,7 +34,7 @@ class GoogleDrive(PooledWorker):
             "token.pickle"
         )
 
-        google_settings = TalpiotSettings.get().google_connection_settings
+        google_settings = Settings.get().google_connection_settings
         self.service = google_settings.get_service('drive', 'v3', SCOPES_DRIVE, token_file_path=token_path)
 
     def get_files_details(self):
@@ -127,6 +127,6 @@ class GoogleDrive(PooledWorker):
 
 
 if __name__ == "__main__":
-    TalpiotSettings()
+    Settings()
     with GoogleDrive.get_instance() as gd:
         pass

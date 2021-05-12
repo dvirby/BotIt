@@ -1,6 +1,6 @@
 from BotFramework import *
 from APIs.ExternalAPIs import *
-from APIs.TalpiotAPIs import *
+from APIs.OtherAPIs import *
 
 MAX_NUM_OF_DICE = 4
 MIN_NUM_OF_DICE = 1
