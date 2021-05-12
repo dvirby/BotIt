@@ -80,19 +80,19 @@ class ErrorReport:
 
 def send_report_main_mail(report: ErrorReport):
     return
-    try:
-        if _mail_client is None:
-            print(report.get_admin_plaintext(), file=sys.stderr)
-            return
-
-        _mail_client.send_mail(
-            "talpibotsystem@gmail.com",
-            "EReport #%s - %s" % (report.report_id, report.session.user.name),
-            report.get_admin_html_text(),
-            text_type="html"
-        )
-    except:
-        pass
+    # try:
+    #     if _mail_client is None:
+    #         print(report.get_admin_plaintext(), file=sys.stderr)
+    #         return
+    #
+    #     _mail_client.send_mail(
+    #         "talpibotsystem@gmail.com",
+    #         "EReport #%s - %s" % (report.report_id, report.session.user.name),
+    #         report.get_admin_html_text(),
+    #         text_type="html"
+    #     )
+    # except:
+    #     pass
 
 
 def log_all_exceptions(function_to_call: Callable[[], None], session: Session, ui: UI):

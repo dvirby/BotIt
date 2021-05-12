@@ -9,9 +9,9 @@ from Features.library.Logic.Book import Book
 
 
 class feature_test17321(BotFeature):
-    SS_ID = "1IBSLf9sSvM-Lk2FXs0uhehRvGmXCiofgZxhmh7yeEHU"
+    SS_ID = "1MZ0G3tfPLEokwd59yQVQyFM9_8Ej4B2bUzO5euh7HdU"
     SHEET = "sheet1"
-    PLACE_OF_DATA = "A3:D67"
+    PLACE_OF_DATA = "A3:D800"
     ROW_OF_START = 3
 
     # init the class and call to super init - The same for every feature
@@ -26,8 +26,11 @@ class feature_test17321(BotFeature):
         :param session: Session object
         :return: nothing
         """
-        buttons = [self.ui.create_button_view("ספריית עיון", self.sifreyIun),
-                   self.ui.create_button_view("ספריית לימוד", self.sifreyLimud)]
+        # buttons = [self.ui.create_button_view("ספריית עיון", self.sifreyIun),
+        #            self.ui.create_button_view("ספריית לימוד", self.sifreyLimud)]
+        buttons = [self.ui.create_button_view("ספריית עיון", self.sifreyIun)]
+                   # self.ui.create_button_view("ספריית לימוד", self.sifreyLimud)]
+
         buttons_list = self.ui.create_button_group_view(session, "איזו ספריה אתה מעוניין?", buttons)
         buttons_list.draw()
 
@@ -35,16 +38,42 @@ class feature_test17321(BotFeature):
         self.ui.create_text_view(session, "הכנס שם של ספר").draw()
         self.ui.get_text(session, self.getFromBookName)
 
+    def get_free_sheet_row(self, spreadsheet_id, sheet_name, last_column_index):
+        """
+        :param spreadsheet_id: The ID of the GoogleSheet document
+        :param sheet_name: Inside the document, what sheet to use
+        :param last_column_index: the last column index to check if empty
+        :return the first row in the google sheets file which is free. Free means that all the cells in the row until
+        the last_column index are empty
+        """
+        with GoogleSheets.get_instance() as gs:
+            row = 1
+            while True:
+                test_list = gs.get_range(spreadsheet_id, sheet_name,
+                                         "A" + str(row) + ":" + str(last_column_index) + str(row))
+                if test_list is None:
+                    break
+                row += 1
+        return row
+
     def getFromBookName(self, session, bookName: str):
         bookDict = {}
+
         with GoogleSheets.get_instance() as gs:
+            # row = str(gs.get_free_sheet_row(self.SS_ID, "sheet1", self._last_sheet_column))
+            # place_of_data = "A" + row + ":" + 'D' + row
+            # print(place_of_data)
+            print(self.PLACE_OF_DATA)
             data = gs.get_range(self.SS_ID, self.SHEET, self.PLACE_OF_DATA)
             row = 0
             for content in data:
                 if len(content) < 4:
                     content.append("")
-                bookDict[content[0]] = Book(content[0], content[1], content[2], content[3],
-                                            row + self.ROW_OF_START)
+                try:
+                    bookDict[content[0]] = Book(content[0], content[1], content[2], content[3],
+                                                row + self.ROW_OF_START)
+                except:
+                    continue
                 row += 1
 
         def try_again(session) -> None:
@@ -119,8 +148,6 @@ class feature_test17321(BotFeature):
         self.ui.summarize_and_close(session,
                                     [self.ui.create_text_view(session, "תודה שזכרת להחזיר! :)")
                                      ], True)
-
-    # todo delete the name to list of borrow
 
     def sifreyLimud(self, seasson):
         pass
