@@ -2,8 +2,8 @@ from __future__ import annotations
 import os
 from BotFramework import BotFeature, UI, Session, View, FeatureType, log_all_exceptions, Button
 from APIs.ExternalAPIs import ScheduledJob
-from APIs.TalpiotSystem import TBLogger
-from APIs.TalpiotAPIs import User
+from APIs.System import BotItLogger
+from APIs.OtherAPIs import User
 from Features.SystemFeatures.HierarchicalMenu.Code.menu_node import MenuNode
 
 
@@ -109,7 +109,7 @@ class HierarchicalMenu(BotFeature):
         """
         self.ui.clear(session)
 
-        TBLogger.info(f"Running feature: {str(feature_object.__class__)}")
+        BotItLogger.info(f"Running feature: {str(feature_object.__class__)}")
 
         self.ui.clear_feature_sessions_user(str(feature_object.__class__.__name__), session.user)
         new_session = self.ui.create_session(str(feature_object.__class__.__name__), session.user)

@@ -3,9 +3,9 @@ from typing import Optional, List
 
 from APIs.ExternalAPIs.GoogleCalendar.calendar_helper import add_timezone_to_date
 from APIs.ExternalAPIs.GoogleCalendar.google_calendar import GoogleCalendar
-from APIs.TalpiotAPIs.Classroom.classroom import Classroom
-from APIs.TalpiotAPIs.Classroom.classroom_event import ClassroomEvent
-from APIs.TalpiotAPIs.User.user import User
+from APIs.OtherAPIs.DatabaseRelated.Classroom.classroom import Classroom
+from APIs.OtherAPIs.DatabaseRelated.Classroom.classroom_event import ClassroomEvent
+from APIs.OtherAPIs.DatabaseRelated.User.user import User
 
 
 def get_google_calendar() -> GoogleCalendar:

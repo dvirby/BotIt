@@ -1,8 +1,6 @@
 import logging
 from typing import Callable
-from apscheduler.jobstores.mongodb import MongoDBJobStore
 from apscheduler.schedulers.background import BackgroundScheduler
-from APIs.TalpiotSystem import TalpiotSettings
 
 
 class _Scheduler:
@@ -38,8 +36,8 @@ class ScheduledJob:
     """
     Used for creating scheduled "jobs" - methods that will be called at a specific time.
     """
-    def __init__(self, method: Callable, params = None, year = None, month = None, day = None,
-                 hour = None, minute = None, day_of_week = None, start_date = None, end_date = None):
+    def __init__(self, method: Callable, params=None, year=None, month=None, day=None,
+                 hour=None, minute=None, day_of_week=None, start_date=None, end_date=None):
         """
         Create a new job
         :param method: the method that will be called when the time is right.

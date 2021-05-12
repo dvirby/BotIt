@@ -1,6 +1,6 @@
 from mongoengine import *
 
-from APIs.TalpiotAPIs.Constraint.UserConstraint.user_constraint import UserConstraint, RoleUserConstraint, OrUserConstraint
+from APIs.OtherAPIs.Constraint.UserConstraint.user_constraint import UserConstraint, RoleUserConstraint, OrUserConstraint
 
 
 class Feature(Document):

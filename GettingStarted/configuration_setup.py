@@ -1,7 +1,7 @@
 import locale
 import os
 
-from APIs.TalpiotSystem import Vault
+from APIs.System import Vault
 from settings import load_settings
 
 

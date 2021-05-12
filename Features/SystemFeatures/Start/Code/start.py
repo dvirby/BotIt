@@ -1,7 +1,7 @@
 from BotFramework import UI, Session, View
 from BotFramework.Feature.bot_feature import BotFeature
 from APIs.ExternalAPIs import ScheduledJob
-from APIs.TalpiotAPIs import User, SecretCodeManager
+from APIs.OtherAPIs import User, SecretCodeManager
 
 
 class Start(BotFeature):

@@ -1,10 +1,9 @@
 from __future__ import annotations
-import os
 from APIs.ExternalAPIs.WorkerPool.pool import Pool
 from APIs.ExternalAPIs.WorkerPool.pooled_worker import PooledWorker
 
 #  If modifying this scopes, delete token.json
-from APIs.TalpiotSystem import TalpiotSettings
+from APIs.System import Settings
 
 SCOPES_SHEETS = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
@@ -61,7 +60,7 @@ class GoogleSheets(PooledWorker):
             "token.pickle"
         )
 
-        google_settings = TalpiotSettings.get().google_connection_settings
+        google_settings = Settings.get().google_connection_settings
         self.service = google_settings.get_service('sheets', 'v4', SCOPES_SHEETS, token_path)
 
     def get_spreadsheet_details(self, spreadsheet_id: str):
@@ -263,8 +262,8 @@ class GoogleSheets(PooledWorker):
 if __name__ == "__main__":
     import os
 
-    from APIs.TalpiotSystem.talpiot_settings import TalpiotGoogleConnectionSettingsServiceAccount
-    TalpiotSettings()
+    from APIs.System.settings import GoogleConnectionSettingsServiceAccount
+    Settings()
 
     with GoogleSheets.get_instance() as gs:
         print(

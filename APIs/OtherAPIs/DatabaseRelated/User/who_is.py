@@ -1,6 +1,6 @@
-from typing import Callable, Any, Optional
-import APIs.TalpiotAPIs.User.user as user
-from APIs.TalpiotAPIs.User.user import User
+from typing import Optional
+import APIs.OtherAPIs.DatabaseRelated.User.user as user
+from APIs.OtherAPIs.DatabaseRelated.User.user import User
 
 
 def get_user_by_telegram_id(telegram_id: int) -> Optional[User]:

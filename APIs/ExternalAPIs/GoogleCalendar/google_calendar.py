@@ -10,7 +10,7 @@ from APIs.ExternalAPIs.WorkerPool.pool import Pool
 from APIs.ExternalAPIs.WorkerPool.pooled_worker import PooledWorker
 
 #  If modifying this scopes, delete token.json
-from APIs.TalpiotSystem import TalpiotSettings
+from APIs.System import Settings
 
 SCOPES_CALENDAR = ['https://www.googleapis.com/auth/calendar']
 
@@ -47,7 +47,7 @@ class GoogleCalendar(PooledWorker):
             "token.pickle"
         )
 
-        google_settings = TalpiotSettings.get().google_connection_settings
+        google_settings = Settings.get().google_connection_settings
         self.service = google_settings.get_service('calendar', 'v3', scopes=SCOPES_CALENDAR, token_file_path=token_path)
 
     def get_events(self, calendar_id: str, start_time: datetime, end_time: datetime, max_results: int = 2500):
@@ -177,7 +177,7 @@ class GoogleCalendar(PooledWorker):
 
 if __name__ == "__main__":
     from datetime import timedelta
-    TalpiotSettings()
+    Settings()
     with GoogleCalendar.get_instance() as gc:
         print(gc.get_events(
             'talpibotsystem@gmail.com',

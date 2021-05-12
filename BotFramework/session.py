@@ -8,7 +8,7 @@ if TYPE_CHECKING:
 from BotFramework.View.view_container import ViewContainer
 
 from BotFramework.bot_user import BotUser
-from APIs.TalpiotAPIs.Authentication.secret_code_manager import SecretCodeManager
+from APIs.OtherAPIs.Authentication.secret_code_manager import SecretCodeManager
 
 
 class Session:

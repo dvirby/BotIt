@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import Dict
 from mongoengine import connect, DEFAULT_CONNECTION_NAME as MONGOENGINE_DEFAULT_CONNECTION_NAME
 
-from APIs.TalpiotSystem import TalpiotSettings, TBLogger
+from APIs.System import Settings, BotItLogger
 
 
 class Vault:
@@ -36,8 +36,8 @@ class Vault:
             return
 
         #  Get username&password from db
-        settings = TalpiotSettings.get().database_settings
-        database_creds = TalpiotSettings.get().database_creds
+        settings = Settings.get().database_settings
+        database_creds = Settings.get().database_creds
 
         #  Get real db name
         db_name = alias
@@ -45,7 +45,7 @@ class Vault:
             db_name = "admin"
 
         #  Connect to the DB
-        TBLogger.info("Connecting to db `%s` [%s]..." % (alias, db_name))
+        BotItLogger.info("Connecting to db `%s` [%s]..." % (alias, db_name))
 
         connect(
             db=db_name,

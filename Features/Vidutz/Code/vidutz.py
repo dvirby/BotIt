@@ -9,8 +9,8 @@ from BotFramework.ui.ui import UI
 from Features.Vidutz.Code.state import State
 from Features.Vidutz.Code.vidutz_cadet_data import VidutzCadetData
 from Features.Vidutz.Code.vidutz_data import VidutzData
-from APIs.TalpiotAPIs.Constraint.UserConstraint.user_constraint import UserConstraint, MachzorConstraint
-from APIs.TalpiotAPIs.User.user import User
+from APIs.OtherAPIs.Constraint.UserConstraint.user_constraint import UserConstraint, MachzorConstraint
+from APIs.OtherAPIs.DatabaseRelated.User.user import User
 
 
 # todo debug this feature

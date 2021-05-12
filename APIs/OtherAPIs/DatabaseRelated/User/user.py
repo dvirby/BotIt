@@ -108,8 +108,8 @@ class User(Document):
 
 if __name__ == "__main__":
     from settings import load_settings
-    from APIs.TalpiotSystem import Vault
-
+    # from APIs.TalpiotSystem import Vault
+    from APIs.System import Vault
     load_settings()
     Vault.get_vault().connect_to_db()
     u = User()

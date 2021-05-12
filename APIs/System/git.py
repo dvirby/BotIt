@@ -6,7 +6,7 @@ from gitlab.v4.objects import ProjectCommit
 GITLAB_TOKEN = 'zjZcRyys41iRSPkF1JDr'
 
 
-class TalpiBotGitIssue:
+class BotItGitIssue:
     def __init__(self, title: str, description: str, labels: [str], is_closed: bool = False):
         self.title: str = title
         self.description: str = description
@@ -15,14 +15,14 @@ class TalpiBotGitIssue:
         self.is_closed: bool = is_closed
 
 
-class TalpiBotGitCommit:
+class BotItGitCommit:
     def __init__(self, message: str, author: str, time_changed: str):
         self.message = message
         self.author = author
         self.time_changed = time_changed
 
 
-class TalpiBotGit:
+class BotItGit:
     """
 
     A class for interacting with the TalpiBot git(lab) repository.
@@ -33,19 +33,19 @@ class TalpiBotGit:
     __instance = None
 
     def __init__(self):
-        if TalpiBotGit.__instance is not None:
+        if BotItGit.__instance is not None:
             raise Exception("This class is a singleton!")
 
-        TalpiBotGit.__instance = self
+        BotItGit.__instance = self
 
         self.gitlab_project = None
         self.connect_to_gitlab()
 
     @staticmethod
-    def get() -> TalpiBotGit:
-        if TalpiBotGit.__instance is None:
-            TalpiBotGit()
-        return TalpiBotGit.__instance
+    def get() -> BotItGit:
+        if BotItGit.__instance is None:
+            BotItGit()
+        return BotItGit.__instance
 
     def connect_to_gitlab(self):
         gitlab_connection = gitlab.Gitlab('https://gitlab.com/', private_token=GITLAB_TOKEN)
@@ -60,7 +60,7 @@ class TalpiBotGit:
         if self.gitlab_project is None:
             raise Exception("TalpiBot Project was not found with this API token.")
 
-    def create_new_issue(self, issue_object: TalpiBotGitIssue):
+    def create_new_issue(self, issue_object: BotItGitIssue):
         issue = self.gitlab_project.issues.create({'title': issue_object.title,
                                                    'description': issue_object.description})
         issue.labels = issue_object.labels
@@ -68,19 +68,12 @@ class TalpiBotGit:
             issue.state_event = 'close'
         issue.save()
 
-    def get_last_commit(self) -> TalpiBotGitCommit:
+    def get_last_commit(self) -> BotItGitCommit:
         last_raw_commit: ProjectCommit = self.gitlab_project.commits.list()[0]
-        return TalpiBotGitCommit(message=last_raw_commit.attributes['message'],
-                                 author=last_raw_commit.attributes['author_name'],
-                                 time_changed=last_raw_commit.attributes['committed_date'])
+        return BotItGitCommit(message=last_raw_commit.attributes['message'],
+                              author=last_raw_commit.attributes['author_name'],
+                              time_changed=last_raw_commit.attributes['committed_date'])
 
 
 if __name__ == '__main__':
-    # TalpiBotGit.get().create_new_issue(
-    #     issue_object=TalpiBotGitIssue(
-    #         title=f'EReport: test',
-    #         description='description',
-    #         labels=['ERROR REPORT']
-    #     )
-    # )
-    TalpiBotGit.get().get_last_commit()
+    BotItGit.get().get_last_commit()

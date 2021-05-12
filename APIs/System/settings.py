@@ -4,17 +4,17 @@ import os
 from abc import ABC, abstractmethod
 
 
-class TalpiotOperationMode(Enum):
+class OperationMode(Enum):
     DEVELOPMENT, TESTING, PRODUCTION = range(3)
 
 
-class TalpiotGoogleConnectionSettings(ABC):
+class GoogleConnectionSettings(ABC):
     @abstractmethod
     def get_service(self, api_name: str, api_version: str, scopes: [str], token_file_path: str):
         pass
 
 
-class TalpiotGoogleConnectionSettingsPersonal(TalpiotGoogleConnectionSettings):
+class GoogleConnectionSettingsPersonal(GoogleConnectionSettings):
     def __init__(self, credentials_path: str):
         self.credentials_path = credentials_path
 
@@ -30,7 +30,7 @@ class TalpiotGoogleConnectionSettingsPersonal(TalpiotGoogleConnectionSettings):
         )
 
 
-class TalpiotGoogleConnectionSettingsServiceAccount(TalpiotGoogleConnectionSettings):
+class GoogleConnectionSettingsServiceAccount(GoogleConnectionSettings):
     def __init__(self, service_account_key_path: str):
         self.service_account_key_path = service_account_key_path
 
@@ -45,7 +45,7 @@ class TalpiotGoogleConnectionSettingsServiceAccount(TalpiotGoogleConnectionSetti
         )
 
 
-class TalpiotDatabaseSettings:
+class DatabaseSettings:
     def __init__(self, server_url: str,
                  server_port: int,
                  use_ssl: bool,
@@ -58,52 +58,52 @@ class TalpiotDatabaseSettings:
         self.authentication_table = authentication_table
 
 
-class TalpiotDatabaseCredentials:
+class DatabaseCredentials:
     def __init__(self, username: str, password: str):
         self.username = username
         self.password = password
 
 
-class TalpiotSettings:
+class Settings:
     __instance = None
 
     def __init__(self,
-                 database_creds: TalpiotDatabaseCredentials,
-                 database_settings: TalpiotDatabaseSettings = TalpiotDatabaseSettings(
+                 database_creds: DatabaseCredentials,
+                 database_settings: DatabaseSettings = DatabaseSettings(
                      server_url="localhost",
                      server_port=27017,
                      use_ssl=False,
                      ssl_server_certificate="",
                      authentication_table='admin'  # todo change name
                  ),
-                 running_mode: TalpiotOperationMode = TalpiotOperationMode.DEVELOPMENT,
+                 running_mode: OperationMode = OperationMode.DEVELOPMENT,
                  credentials_path: str = '.',
-                 google_connection_settings: TalpiotGoogleConnectionSettings = TalpiotGoogleConnectionSettingsPersonal(
+                 google_connection_settings: GoogleConnectionSettings = GoogleConnectionSettingsPersonal(
                      credentials_path=os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
                                                    "ExternalAPIs", "Google",
                                                    "credentials.json")
                  )):
 
-        if TalpiotSettings.__instance is not None:
+        if Settings.__instance is not None:
             raise Exception("This class is a singleton!")
 
         self.database_creds = database_creds
         self.database_settings = database_settings
-        self.running_mode: TalpiotOperationMode = running_mode
+        self.running_mode: OperationMode = running_mode
         self.credentials_path: str = credentials_path
         self.google_connection_settings = google_connection_settings
 
-        TalpiotSettings.__instance = self
+        Settings.__instance = self
 
     @staticmethod
-    def isset() -> bool:
-        if TalpiotSettings.__instance is None:
+    def isSet() -> bool:
+        if Settings.__instance is None:
             return False
         else:
             return True
 
     @staticmethod
-    def get() -> TalpiotSettings:
-        if TalpiotSettings.__instance is None:
+    def get() -> Settings:
+        if Settings.__instance is None:
             raise Exception("Settings are not set.")
-        return TalpiotSettings.__instance
+        return Settings.__instance

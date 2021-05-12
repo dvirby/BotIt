@@ -1,16 +1,11 @@
 from __future__ import annotations
-from typing import Union
 import os
-import dateutil.parser
-from datetime import datetime, date
 
-from APIs.ExternalAPIs.GoogleCalendar.calendar_event import CalendarEvent
-from APIs.ExternalAPIs.GoogleCalendar.calendar_helper import iso_date_format
 from APIs.ExternalAPIs.WorkerPool.pool import Pool
 from APIs.ExternalAPIs.WorkerPool.pooled_worker import PooledWorker
 
 #  If modifying this scopes, delete token.json
-from APIs.TalpiotSystem import TalpiotSettings
+from APIs.System import Settings
 
 SCOPES_DOC = ['https://www.googleapis.com/auth/documents']
 
@@ -42,7 +37,7 @@ class GoogleDoc(PooledWorker):
             "token.pickle"
         )
 
-        google_settings = TalpiotSettings.get().google_connection_settings
+        google_settings = Settings.get().google_connection_settings
         self.service = google_settings.get_service('docs', 'v1', scopes=SCOPES_DOC, token_file_path=token_path)
 
     def insert_list_to_sheet(self, document_id, lines):
@@ -77,6 +72,6 @@ class GoogleDoc(PooledWorker):
 if __name__ == "__main__":
     from datetime import timedelta
 
-    TalpiotSettings()
+    Settings()
     with GoogleDoc.get_instance() as gc:
         gc.connect_to_doc()

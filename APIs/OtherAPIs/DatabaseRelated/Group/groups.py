@@ -1,5 +1,5 @@
-from APIs.TalpiotAPIs import User
-from APIs.TalpiotAPIs.Group.group import Group
+from APIs.OtherAPIs import User
+from APIs.OtherAPIs.DatabaseRelated.Group.group import Group
 
 
 def get_user_groups(user: User) -> [Group]:

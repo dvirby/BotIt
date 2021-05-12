@@ -3,9 +3,9 @@ from datetime import datetime
 from datetime import timedelta
 
 from APIs.ExternalAPIs.GoogleCalendar.google_calendar import GoogleCalendar
-from APIs.TalpiotAPIs.Classroom.classroom import Classroom
-from APIs.TalpiotAPIs.Classroom.classroom_event import ClassroomEvent
-from APIs.TalpiotAPIs.User.user import User
+from APIs.OtherAPIs.DatabaseRelated.Classroom.classroom import Classroom
+from APIs.OtherAPIs.DatabaseRelated.Classroom.classroom_event import ClassroomEvent
+from APIs.OtherAPIs.DatabaseRelated.User.user import User
 
 OLD_CLASSROOM_CALENDAR = "eeqbp1vhv9d4t7gc0liu4fktq8@group.calendar.google.com"
 # -- TEST_CLASSROOM_CALENDAR = "ao9nt3fk1r2ot3p6pae2pjmv98@group.calendar.google.com"

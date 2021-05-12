@@ -1,8 +1,7 @@
 from __future__ import annotations
 from mongoengine import *
 
-from APIs.ExternalAPIs import GoogleSheets
-from APIs.TalpiotAPIs.User.user import User
+from APIs.OtherAPIs.DatabaseRelated.User.user import User
 
 
 class Group(Document):

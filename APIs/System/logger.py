@@ -93,10 +93,10 @@ class LoggingType(Enum):
     DEBUG = BColors.OKBLUE + "[?] [DEBUG]" + BColors.ENDC
 
 
-class TBLogger:
+class BotItLogger:
     @staticmethod
     def __log(message: str, logging_type: LoggingType = LoggingType.INFO):
-        ascii_time = TBLogger.get_time()
+        ascii_time = BotItLogger.get_time()
         calling_info = CallerInfo.get_caller_info()
         print(f"{logging_type.value} [{ascii_time}] [{calling_info}] [{BColors.OKGREEN}{message}{BColors.ENDC}]")
 
@@ -107,24 +107,24 @@ class TBLogger:
 
     @staticmethod
     def info(message: str):
-        TBLogger.__log(message, LoggingType.INFO)
+        BotItLogger.__log(message, LoggingType.INFO)
 
     @staticmethod
     def debug(message: str):
-        TBLogger.__log(message, LoggingType.DEBUG)
+        BotItLogger.__log(message, LoggingType.DEBUG)
 
     @staticmethod
     def warning(message: str):
-        TBLogger.__log(message, LoggingType.WARNING)
+        BotItLogger.__log(message, LoggingType.WARNING)
 
     @staticmethod
     def error(message: str):
-        TBLogger.__log(message, LoggingType.ERROR)
+        BotItLogger.__log(message, LoggingType.ERROR)
 
     @staticmethod
     def success(message: str):
-        TBLogger.__log(message, LoggingType.SUCCESS)
+        BotItLogger.__log(message, LoggingType.SUCCESS)
 
     @staticmethod
     def failure(message: str):
-        TBLogger.__log(message, LoggingType.FAILURE)
+        BotItLogger.__log(message, LoggingType.FAILURE)
