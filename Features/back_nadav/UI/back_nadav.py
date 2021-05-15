@@ -71,4 +71,3 @@ class back_nadav(BotFeature):
         :return: List of Jobs that will be created and called.
         """
         return []
-

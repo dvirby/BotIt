@@ -5,11 +5,9 @@ class ProfileLogic:
     @staticmethod
     def get_user_description(user: User) -> [str]:
         messages = [
-            #בשביל שזה יעבוד צריך להגדיר בקוד את מספר הטלפון והמחזור.
-            '** שם משתמש: **' + user.name,
-            '** מספר פלאפון: **' + str(user.phone_number),
-            '** כתובת מייל: **' + user.email,
-            '** מחזור:**' + str(user.mahzor)
+            '** username: **' + user.name,
+            '** telegram ID: **' + str(user.telegram_id),
+            '** E-Mail: **' + user.email
         ]
 
         return messages

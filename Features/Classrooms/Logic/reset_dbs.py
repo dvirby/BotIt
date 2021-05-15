@@ -1,6 +1,6 @@
 from APIs.ExternalAPIs import GoogleCalendar
-from Features.Shagmach.Classrooms.DBModels.classroom import *
-from Features.Shagmach.Classrooms.DBModels.classroom_event import *
+from Features.Classrooms.DBModels.classroom import *
+from Features.Classrooms.DBModels.classroom_event import *
 from datetime import datetime
 
 class_list = ["ב'1", "ב'2", "ב'4", "ב'6", "ב'7", "ב'8", "ג'3",

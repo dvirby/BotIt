@@ -5,7 +5,6 @@ from APIs.OtherAPIs import User
 
 
 def get_bot_manager() -> BotManager:
-
     return TelegramBotManager(settings.get_bot_token(), User)
 
 
