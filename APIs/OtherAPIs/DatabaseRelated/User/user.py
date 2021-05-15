@@ -5,6 +5,7 @@ from mongoengine import *
 from enum import Enum
 
 
+
 class Gender(Enum):
     male = "male"
     female = "female"
@@ -13,8 +14,7 @@ class Gender(Enum):
 
 class User(Document):
     meta = {'collection': 'users_info'}
-
-    email: str = EmailField(required=True)
+    email: str = StringField()
     name: str = StringField(max_length=100)
     mahzor: int = IntField()
     gender: str = StringField(max_length=10)
@@ -108,14 +108,13 @@ class User(Document):
 
 if __name__ == "__main__":
     from settings import load_settings
-    # from APIs.TalpiotSystem import Vault
     from APIs.System import Vault
     load_settings()
     Vault.get_vault().connect_to_db()
     u = User()
-    u.email = "dvirby@gmail.com"
-    u.name = "Dvir"
+    u.email = "nadav.mihov@gmail.com"
+    u.name = "nadav"
     u.role = ["מתלם","חנתר"]
-    u.telegram_id = 953736924
+    u.telegram_id = 2134546368
     u.save()
     print(User.objects)

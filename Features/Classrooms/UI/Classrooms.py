@@ -5,9 +5,9 @@ from BotFramework.View.view import View
 from BotFramework.session import Session
 from BotFramework.ui.ui import UI
 from APIs.OtherAPIs.DatabaseRelated.User.user import User
-from Features.Shagmach.Classrooms.Logic.class_logic import *
-from Features.Shagmach.Classrooms.Logic.order_classroom_form import OrderClassroomForm
-from Features.Shagmach.Classrooms.Logic.reset_dbs import *
+from Features.Classrooms.Logic.class_logic import *
+from Features.Classrooms.Logic.order_classroom_form import OrderClassroomForm
+from Features.Classrooms.Logic.reset_dbs import *
 
 
 ADMIN = "inbar.gil.41@gmail.com"

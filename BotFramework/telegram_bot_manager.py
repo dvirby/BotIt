@@ -15,7 +15,9 @@ from BotFramework.telegram_ui import TelegramUI
 from BotFramework.crash_logger import log_all_exceptions
 from BotFramework.session import Session
 from BotFramework.bot_logger import BotLogger
-
+from BotFramework.user_detailes_form import UserDetailesForm
+from BotFramework.Activity.FormActivity.form_activity import FormActivity
+from APIs.OtherAPIs import User
 
 class TelegramBotManager(BotManager):
     def __init__(self, token: str, user_type: Type[BotUser]):
@@ -92,8 +94,33 @@ class TelegramBotManager(BotManager):
                             level=logging.INFO)
         self.logger = logging.getLogger(__name__)
 
+
+
+    def func1(self, session: Session, form_activity: FormActivity, form: UserDetailesForm):
+        user = self.user_type.get_by_telegram_id(session.user.telegram_id)
+        user.email = str(form.eMail.value)
+        user.name = str(form.name.value)
+        user.save()
+
     @run_async
     def command_handler(self, update: Update, context: CallbackContext):
+
+
+        if update.message.text == '/register':
+
+            try:
+                user = self.user_type.get_by_telegram_id(update.effective_user.id)
+                session = self.ui.create_session("register", user)
+                self.ui.create_text_view(session,"You already have user! press /list").draw()
+            except:
+                user = User()
+                user.telegram_id = update.effective_chat.id
+                user.save()
+                session = self.ui.create_session("register", user)
+                self.ui.create_form_view(session, UserDetailesForm(), "please insert the following details:",
+                                         self.func1).draw()
+
+
         """
         A message handler for getting commands
         """
@@ -116,16 +143,22 @@ class TelegramBotManager(BotManager):
 
             return
 
+
         user = self.user_type.get_by_telegram_id(update.effective_user.id)
         if user is None:
             print(f"UNKNOWN ID: {update.effective_user.id}")
             raise Exception("ERROR - USER IS NONE" + f"UNKNOWN ID: {update.effective_user.id}")
 
-        if update.message.text == '/list':
-            from Features.SystemFeatures.HierarchicalMenu.Code.hierarchical_menu import HierarchicalMenu
-            self.raw_api_bot.delete_message(user.telegram_id, update.message.message_id)
 
-            HierarchicalMenu.run_menu(self.ui, user)
+
+        if update.message.text == '/list':
+            #if isRegistered:
+                from Features.SystemFeatures.HierarchicalMenu.Code.hierarchical_menu import HierarchicalMenu
+                self.raw_api_bot.delete_message(user.telegram_id, update.message.message_id)
+
+                HierarchicalMenu.run_menu(self.ui, user)
+            #else:
+            #    pass
 
         if update.message.text in self._custom_features:
             self.ui.clear_feature_sessions_user(update.message.text, user)

@@ -1,6 +1,6 @@
 from APIs.ExternalAPIs import GoogleCalendar
-from Features.Shagmach.Classrooms.DBModels.classroom import *
-from Features.Shagmach.Classrooms.DBModels.classroom_event import *
+from Features.Classrooms.DBModels.classroom import *
+from Features.Classrooms.DBModels.classroom_event import *
 from datetime import datetime
 
 CALENDAR_ID = 'eeqbp1vhv9d4t7gc0liu4fktq8@group.calendar.google.com'

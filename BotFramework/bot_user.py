@@ -17,3 +17,7 @@ class BotUser(ABC):
     @staticmethod
     def get_by_telegram_id(telegram_id: int) -> Optional[BotUser]:
         pass
+
+    @telegram_id.setter
+    def telegram_id(self, value):
+        self._telegram_id = value
