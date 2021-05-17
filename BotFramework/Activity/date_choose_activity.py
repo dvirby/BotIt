@@ -21,8 +21,8 @@ class DateChooseView(Activity):
     will have to close it yourself.
     """
 
-    HEBREW_SHORT_DAYS = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש']
-    CANCEL_CHOOSE_DATE = "ביטול"
+    HEBREW_SHORT_DAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+    CANCEL_CHOOSE_DATE = "Cancel"
     NO_DAY_BUTTON_TEXT = " "
 
     def __init__(self, view_container: ViewContainer, choose_callback: Callable[[DateChooseView, Session, date], None],
@@ -132,27 +132,43 @@ class DateChooseView(Activity):
         my_calendar = calendar.monthcalendar(year, month)
         for week in my_calendar:
             row = []
-            for day in week:
-                if day == 0:
+            if month < now.month or year < now.year:
+                for day in week:
                     row.append(Button(DateChooseView.NO_DAY_BUTTON_TEXT, IGNORE))
                     continue
+            elif month == now.month and year == now.year:
+                for day in week:
+                    if day == 0 | day < now.day:
+                        row.append(Button(DateChooseView.NO_DAY_BUTTON_TEXT, IGNORE))
+                        continue
+                    day_to_print = str(day)
+                    selected_date = date(year, month, day)
 
-                day_to_print = str(day)
-                selected_date = date(year, month, day)
+                    #  Special emoji for today
+                    if selected_date == now:
+                        # print a sun emoji
+                        day_to_print = "\u2600"
 
-                #  Special emoji for today
-                if selected_date == now:
-                    # print a sum emoji
-                    day_to_print = "\u2600"
+                    #  Special for the selected date
+                    if selected_date == self.chosen_date:
+                        day_to_print = "*" + day_to_print + "*"
 
-                #  Special for the selected date
-                if selected_date == self.chosen_date:
-                    day_to_print = "*" + day_to_print + "*"
+                    row.append(Button(
+                        day_to_print,
+                        lambda session, selected_date=selected_date: self._date_clicked(session, selected_date)
+                    ))
+            elif month > now.month or year > now.year:
+                for day in week:
+                    if day == 0:
+                        row.append(Button(DateChooseView.NO_DAY_BUTTON_TEXT, IGNORE))
+                        continue
+                    day_to_print = str(day)
+                    selected_date = date(year, month, day)
 
-                row.append(Button(
-                    day_to_print,
-                    lambda session, selected_date=selected_date: self._date_clicked(session, selected_date)
-                ))
+                    row.append(Button(
+                        day_to_print,
+                        lambda session, selected_date=selected_date: self._date_clicked(session, selected_date)
+                    ))
 
             matrix += [row]
 
