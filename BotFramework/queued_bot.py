@@ -5,11 +5,11 @@ from BotFramework import crash_logger
 from BotFramework.session import Session
 
 
-class TelegramQueuedBot(telegram.bot.Bot):
+class QueuedBot(telegram.bot.Bot):
     '''A subclass of Bot which delegates send method handling to MQ'''
 
     def __init__(self, *args, is_queued_def=True, mqueue=None, **kwargs):
-        super(TelegramQueuedBot, self).__init__(*args, **kwargs)
+        super(QueuedBot, self).__init__(*args, **kwargs)
         # below 2 attributes should be provided for decorator usage
         self._is_messages_queued_default = is_queued_def
         self._msg_queue = mqueue or mq.MessageQueue()
@@ -25,7 +25,7 @@ class TelegramQueuedBot(telegram.bot.Bot):
         '''Wrapped method would accept new `queued` and `isgroup`
         OPTIONAL arguments'''
         try:
-            return super(TelegramQueuedBot, self).send_message(*args, **kwargs)
+            return super(QueuedBot, self).send_message(*args, **kwargs)
         except:
             report = crash_logger.ErrorReport(session, traceback.format_exc())
             crash_logger.send_report_main_mail(report)
@@ -36,7 +36,7 @@ class TelegramQueuedBot(telegram.bot.Bot):
         '''Wrapped method would accept new `queued` and `isgroup`
         OPTIONAL arguments'''
         try:
-            return super(TelegramQueuedBot, self).send_photo(*args, **kwargs)
+            return super(QueuedBot, self).send_photo(*args, **kwargs)
         except:
             report = crash_logger.ErrorReport(session, traceback.format_exc())
             crash_logger.send_report_main_mail(report)
@@ -47,7 +47,7 @@ class TelegramQueuedBot(telegram.bot.Bot):
         '''Wrapped method would accept new `queued` and `isgroup`
         OPTIONAL arguments'''
         try:
-            return super(TelegramQueuedBot, self).send_location(*args, **kwargs)
+            return super(QueuedBot, self).send_location(*args, **kwargs)
         except:
             report = crash_logger.ErrorReport(session, traceback.format_exc())
             crash_logger.send_report_main_mail(report)
@@ -58,7 +58,7 @@ class TelegramQueuedBot(telegram.bot.Bot):
         '''Wrapped method would accept new `queued` and `isgroup`
         OPTIONAL arguments'''
         try:
-            return super(TelegramQueuedBot, self).send_contact(*args, **kwargs)
+            return super(QueuedBot, self).send_contact(*args, **kwargs)
         except:
             report = crash_logger.ErrorReport(session, traceback.format_exc())
             crash_logger.send_report_main_mail(report)

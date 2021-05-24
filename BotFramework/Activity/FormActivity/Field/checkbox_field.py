@@ -2,7 +2,7 @@ from typing import List, Callable
 
 from BotFramework.Activity.FormActivity.Field.field import Field
 from BotFramework.Activity.checkbox_activity import CheckBoxActivity
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 
 
 class CheckBoxField(Field[List[str]]):

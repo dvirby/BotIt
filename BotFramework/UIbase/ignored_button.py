@@ -1,4 +1,4 @@
-from BotFramework.ui.button import Button
+from BotFramework.UIbase.button import Button
 
 
 class IgnoredButton(Button):

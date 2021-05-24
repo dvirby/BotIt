@@ -1,11 +1,8 @@
 import math
-from typing import Callable, Dict
-from fuzzywuzzy import process
-from BotFramework.View.button_matrix_view import ButtonMatrixView
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.button_matrix_view import ButtonMatrixView
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 from BotFramework.session import Session
 from BotFramework.Activity.activity import Activity
-from APIs.Tools.ClosestStrings.closest_strings import get_closest_strings
 from BotFramework.View.view import View
 
 
@@ -19,7 +16,7 @@ class LibraryActivity(Activity):
                  data_dict: dict, title: str = "בחר שאלה או קטגוריה:", max_buttons=8):
         """
         Initializes a new DateChooseView.
-        :param ui: The UI to send through
+        :param UIbase: The UI to send through
         :param session: The Session to use (what user to send to?)
         :param data_dict: Dict containing all data of the library
         :param title: Text to be displayed before button selection

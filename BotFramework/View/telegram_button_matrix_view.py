@@ -1,7 +1,7 @@
 import telegram
 
 from BotFramework.View.telegram_view_container import TelegramViewContainer
-from BotFramework.View.button_matrix_view import ButtonMatrixView
+from BotFramework.View.BaseComponents.button_matrix_view import ButtonMatrixView
 
 
 class TelegramButtonMatrixView(ButtonMatrixView):
@@ -11,7 +11,7 @@ class TelegramButtonMatrixView(ButtonMatrixView):
     def __init__(self, view_container: TelegramViewContainer, text: str = "", buttons = None):
         """
         Creates a new ButtonMatrixView
-        :param ui: The UI to draw with
+        :param UIbase: The UI to draw with
         :param session: The session to draw at (what user to send to?)
         :param text: The text to show above the buttons
         :param buttons: A matrix of buttons to send

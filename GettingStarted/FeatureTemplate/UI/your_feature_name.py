@@ -1,9 +1,9 @@
 from APIs.ExternalAPIs import *
-from APIs.Database import *
+from APIs.OtherAPIs.DatabaseRelated import *
 from BotFramework.Feature.bot_feature import BotFeature
 from BotFramework.View.view import View
 from BotFramework.session import Session
-from BotFramework.ui.ui import UI
+from BotFramework.UIbase.create_basic_ui import UI
 from APIs.OtherAPIs.DatabaseRelated.User.user import User
 
 

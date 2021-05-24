@@ -3,9 +3,9 @@ from typing import Optional
 import traceback
 import os
 from BotFramework import FeatureType
-from BotFramework.Feature.FeatureSettings import FeatureSettings
+from BotFramework.Feature.feature_settings import FeatureSettings
 from BotFramework.Feature.feature_loader import FeatureLoader
-from BotFramework.ui.ui import UI
+from BotFramework.UIbase.create_basic_ui import UI
 from Features.SystemFeatures.HierarchicalMenu.Code.helper import get_abs_dirs_in_dir
 from APIs.System import Vault, BotItLogger
 

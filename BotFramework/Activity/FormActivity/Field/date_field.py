@@ -4,7 +4,7 @@ from datetime import datetime
 from BotFramework.session import Session
 from BotFramework.Activity.date_choose_activity import DateChooseView
 from BotFramework.Activity.FormActivity.Field.field import Field
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 
 
 class DateField(Field[datetime]):

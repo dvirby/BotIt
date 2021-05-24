@@ -2,10 +2,10 @@ from typing import Optional
 
 from BotFramework.Feature.bot_feature import BotFeature
 from BotFramework.View.telegram_button_group_view import TelegramButtonGroupView
-from BotFramework.View.button_group_view import ButtonGroupView
+from BotFramework.View.BaseComponents.button_group_view import ButtonGroupView
 from BotFramework.View.view import View
 from BotFramework.session import Session
-from BotFramework.ui.ui import UI
+from BotFramework.UIbase.create_basic_ui import UI
 from Features.Vidutz.Code.state import State
 from Features.Vidutz.Code.vidutz_cadet_data import VidutzCadetData
 from Features.Vidutz.Code.vidutz_data import VidutzData
@@ -63,13 +63,13 @@ class Vidutz(BotFeature):
         self.update_views(vidutz, to_all=True)
         # cadet_callback = lambda cadet, state: self.update_cadet(vidutz, cadet, state)
         # for hantar in vidutz.hantar_children:
-        #     self.ui.create_button_group_view(hantar.session, r'וידו"צ בתהליך...',
+        #     self.UIbase.create_button_group_view(hantar.session, r'וידו"צ בתהליך...',
         #                                      vidutz.get_buttons(cadet_callback, hantar,
         #                                                         close_callback=lambda test: self.finish_vidutz(vidutz),
         #                                                         sort_callback=lambda test: self.update_views(vidutz),
         #                                                         hantar=True)).draw()
         # for hapash in vidutz.hapash_children:
-        #     self.ui.create_button_group_view(hapash.session, r'וידו"צ צוותי',
+        #     self.UIbase.create_button_group_view(hapash.session, r'וידו"צ צוותי',
         #                                      vidutz.get_buttons(cadet_callback, cadet=hapash)).draw()
 
     def update_views(self, vidutz: VidutzData, updated_cadet: Optional[VidutzCadetData] = None, to_all: bool = False):

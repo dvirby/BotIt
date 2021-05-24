@@ -2,8 +2,8 @@ from __future__ import annotations
 from typing import Callable
 
 from BotFramework.Activity.FormActivity.Field.field import Field
-from BotFramework.View.button_matrix_view import ButtonMatrixView
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.button_matrix_view import ButtonMatrixView
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 from BotFramework.session import Session
 from BotFramework.Activity.activity import Activity
 
@@ -24,7 +24,7 @@ class FormActivity(Activity):
     def __init__(self, view_container: ViewContainer, formObject, name: str, callback: Callable[[Session, FormActivity, object], None]):
         """
         Initializes a new DateChooseView.
-        :param ui: The UI to send through
+        :param UIbase: The UI to send through
         :param session: The Session to use (what user to send to?)
         """
         super().__init__(view_container)

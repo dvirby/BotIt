@@ -3,7 +3,7 @@ import telegram
 from telegram import File
 
 from BotFramework.View.telegram_view_container import TelegramViewContainer
-from BotFramework.telegram_queued_bot import TelegramQueuedBot
+from BotFramework.queued_bot import QueuedBot
 
 from BotFramework.View.telegram_button_group_view import TelegramButtonGroupView
 from BotFramework.View.telegram_button_matrix_view import TelegramButtonMatrixView
@@ -12,21 +12,21 @@ from BotFramework.View.telegram_dice_view import TelegramDiceView
 from BotFramework.View.telegram_image_view import TelegramImageView
 from BotFramework.View.telegram_location_view import TelegramLocationView
 from BotFramework.View.telegram_text_view import TelegramTextView
-from BotFramework.telegram_session import TelegramSession
+from BotFramework.session import Session
 from BotFramework.crash_logger import log_all_exceptions
 from BotFramework.session import Session
 from BotFramework.bot_logger import BotLogger
 from BotFramework.bot_user import BotUser
 from telegram.ext import CallbackContext, MessageHandler, Filters, CallbackQueryHandler
 from telegram.ext.dispatcher import run_async, Dispatcher
-from BotFramework.ui.ui import UI
+from BotFramework.UIbase.create_basic_ui import UI
 
 
 # UI Methods for interfacing with the telegram API. Inherits everything from the base UI class.
 class TelegramUI(UI):
 
-    # Initialize the ui
-    def __init__(self, raw_bot: TelegramQueuedBot, dispatcher: Dispatcher, user_type: Type[BotUser], test=False):
+    # Initialize the UIbase
+    def __init__(self, raw_bot: QueuedBot, dispatcher: Dispatcher, user_type: Type[BotUser], test=False):
         """
         Initialize the UI of the bot (called once, when the bot is created. Handles all users and sessions).
         :param raw_bot: the bot object given by the telegram  API
@@ -34,7 +34,7 @@ class TelegramUI(UI):
         """
         # Save reference to the raw bot (for sending messages).
         super().__init__()
-        self.raw_bot: TelegramQueuedBot = raw_bot
+        self.raw_bot: QueuedBot = raw_bot
         # Save reference to the dispatcher (for adding button events).
         self.dispatcher = dispatcher
 
@@ -44,7 +44,7 @@ class TelegramUI(UI):
         # create handlers for both text and buttons
         self.create_handlers()
 
-    def create_session(self, feature_name: str, user: BotUser) -> TelegramSession:
+    def create_session(self, feature_name: str, user: BotUser) -> Session:
         """
         Creates and returns a new session for the given
         feature_name and User
@@ -52,7 +52,7 @@ class TelegramUI(UI):
         :param user: The user for the Session
         :return: Created session object
         """
-        return TelegramSession(feature_name, user, self)
+        return Session(feature_name, user, self)
 
     def create_popup_session(self, feature_name: str, user: BotUser, callback) -> None:
         """
@@ -63,7 +63,7 @@ class TelegramUI(UI):
         :param callback: callback function to call after getting permission to create the session
         :return: Created session object
         """
-        session = TelegramSession(feature_name, user, self)
+        session = Session(feature_name, user, self)
         index = Session.sessions[user.id]
         if len(index) == 1:
             callback(session)
@@ -75,7 +75,7 @@ class TelegramUI(UI):
     def create_text_view(self, session: Session, text: str,
                          view_container: TelegramViewContainer = None) -> TelegramTextView:
         """
-        Create a text view object for sending on this ui
+        Create a text view object for sending on this UIbase
         :param session: the session to send on top of
         :param text: the text to send
         :param view_container: (Not required) the view container to draw the view in. If None, uses
@@ -89,7 +89,7 @@ class TelegramUI(UI):
     def create_button_group_view(self, session: Session, title: str, buttons,
                                  view_container: TelegramViewContainer = None) -> TelegramButtonGroupView:
         """
-        Create a button group view object for sending on this ui
+        Create a button group view object for sending on this UIbase
         :param session: the session to send on top of
         :param title: the text to send
         :param buttons: the buttons to send
@@ -104,7 +104,7 @@ class TelegramUI(UI):
     def create_button_matrix_view(self, session: Session, title: str, buttons,
                                   view_container: TelegramViewContainer = None) -> TelegramButtonMatrixView:
         """
-        Create a button matrix view object for sending on this ui
+        Create a button matrix view object for sending on this UIbase
         :param session: the session to send on top of
         :param title: the text to send
         :param buttons: the buttons to send
@@ -119,7 +119,7 @@ class TelegramUI(UI):
     def create_contact_view(self, session: Session, name: str, phone: str, email: str = None,
                             view_container: TelegramViewContainer = None) -> TelegramContactView:
         """
-        Create a contact view object for sending on this ui
+        Create a contact view object for sending on this UIbase
         :param session: the session to send on top of
         :param name: the text to send
         :param phone: the phone number to send
@@ -134,7 +134,7 @@ class TelegramUI(UI):
     def create_image_view(self, session: Session, title: str, img_src: str,
                           view_container: TelegramViewContainer = None) -> TelegramImageView:
         """
-        Create an image view object for sending on this ui
+        Create an image view object for sending on this UIbase
         :param session: the session to send on top of
         :param title: the text to send
         :param img_src: the source of the image to send
@@ -149,7 +149,7 @@ class TelegramUI(UI):
     def create_location_view(self, session: Session, text: str, latitude: float,
                              longitude: float, view_container: TelegramViewContainer = None) -> TelegramLocationView:
         """
-        Create an location view object for sending on this ui
+        Create an location view object for sending on this UIbase
         :param session: the session to send on top of
         :param title: the text to send
         :param img_src: the source of the image to send

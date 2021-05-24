@@ -1,7 +1,7 @@
 from typing import Callable, TypeVar, Generic, Optional
 
 from BotFramework.session import Session
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 
 
 T = TypeVar('T')

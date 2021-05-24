@@ -1,10 +1,10 @@
 import math
 from typing import Callable, Dict, List
-from BotFramework.View.button_matrix_view import ButtonMatrixView
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.button_matrix_view import ButtonMatrixView
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 from BotFramework.session import Session
 from BotFramework.Activity.activity import Activity
-from BotFramework.ui.button import Button
+from BotFramework.UIbase.button import Button
 
 
 class CheckBoxActivity(Activity):
@@ -28,7 +28,7 @@ class CheckBoxActivity(Activity):
                  simple_choice: bool = False):
         """
          Initializes a new CheckBoxActivity.
-        :param ui: The UI to send through
+        :param UIbase: The UI to send through
         :param session: The Session to use (what user to send to?)
         :param options: All options the user can choose from.
         :param submit_callback: Function to be called when submitted

@@ -1,4 +1,4 @@
-from typing import Callable, Dict, Type
+from typing import Callable, Dict
 from abc import *
 
 from datetime import date, datetime
@@ -7,27 +7,25 @@ from telegram import File
 
 from BotFramework.Activity.FormActivity.form_activity import FormActivity
 from BotFramework.Activity.closest_name_activity import ClosestNameActivity
-from BotFramework.Activity.strings_choose_activity import StringsChooseActivity
-from BotFramework.Activity.names_choose_activity import NamesChooseActivity
-from BotFramework.View.button_group_view import ButtonGroupView
-from BotFramework.View.button_matrix_view import ButtonMatrixView
-from BotFramework.View.contact_view import ContactView
+from BotFramework.View.BaseComponents.button_group_view import ButtonGroupView
+from BotFramework.View.BaseComponents.button_matrix_view import ButtonMatrixView
+from BotFramework.View.BaseComponents.contact_view import ContactView
 from BotFramework.Activity.date_choose_activity import DateChooseView
-from BotFramework.View.dice_view import DiceView
-from BotFramework.View.image_view import ImageView
-from BotFramework.View.location_view import LocationView
+from BotFramework.View.BaseComponents.dice_view import DiceView
+from BotFramework.View.BaseComponents.image_view import ImageView
+from BotFramework.View.BaseComponents.location_view import LocationView
 from BotFramework.View.text_view import TextView
 from BotFramework.Activity.time_choose_activity import TimeChooseView
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 from BotFramework.session import Session
-from BotFramework.ui.button import Button
+from BotFramework.UIbase.button import Button
 from BotFramework.bot_user import BotUser
 
 
 class UI(ABC):
     MAX_LIST_LEN = 15
 
-    # Initialize the ui
+    # Initialize the UIbase
     def __init__(self):
         """
         Initialize the UI of the bot (called once, when the bot is created. Handles all users and sessions).
@@ -136,7 +134,7 @@ class UI(ABC):
     def create_text_view(self, session: Session, text: str,
                          view_container: ViewContainer = None) -> TextView:
         """
-        Create a text view object for sending on this ui
+        Create a text view object for sending on this UIbase
         :param session: the session to send on top of
         :param text: the text to send
         :param view_container: (Not required) the view container to draw the view in. If None, uses
@@ -149,7 +147,7 @@ class UI(ABC):
     def create_button_group_view(self, session: Session, title: str, buttons: [Button],
                                  view_container: ViewContainer = None) -> ButtonGroupView:
         """
-        Create a button group view object for sending on this ui
+        Create a button group view object for sending on this UIbase
         :param session: the session to send on top of
         :param title: the text to send
         :param buttons: the buttons to send
@@ -164,7 +162,7 @@ class UI(ABC):
                                   buttons: [Button],
                                   view_container: ViewContainer = None) -> ButtonMatrixView:
         """
-        Create a button matrix view object for sending on this ui
+        Create a button matrix view object for sending on this UIbase
         :param session: the session to send on top of
         :param title: the text to send
         :param buttons: the buttons to send
@@ -178,7 +176,7 @@ class UI(ABC):
     def create_contact_view(self, session: Session, name: str, phone: str, email: str = None,
                             view_container: ViewContainer = None) -> ContactView:
         """
-        Create a contact view object for sending on this ui
+        Create a contact view object for sending on this UIbase
         :param session: the session to send on top of
         :param name: the text to send
         :param phone: the phone number to send
@@ -192,7 +190,7 @@ class UI(ABC):
     def create_image_view(self, session: Session, title: str, img_src: str,
                           view_container: ViewContainer = None) -> ImageView:
         """
-        Create an image view object for sending on this ui
+        Create an image view object for sending on this UIbase
         :param session: the session to send on top of
         :param title: the text to send
         :param img_src: the source of the image to send
@@ -206,7 +204,7 @@ class UI(ABC):
     def create_location_view(self, session: Session, text: str, latitude: float, longitude: float,
                              view_container: ViewContainer = None) -> LocationView:
         """
-        Create an location view object for sending on this ui
+        Create an location view object for sending on this UIbase
         :param session: the session to send on top of
         :param text: The text to send
         :param latitude: Latitude of location
@@ -263,14 +261,6 @@ class UI(ABC):
         view_container = view_container if view_container is not None else session.view_container
 
         return ClosestNameActivity(view_container, data, key, count, choose_callback, try_again)
-
-    def create_names_choose_view(self, session: Session, submit_callback: Callable[[Session, list], None],
-                                 from_names: [str] = None, max_buttons: int = 6,
-                                 view_container: ViewContainer = None):
-        view_container = view_container if view_container is not None else session.view_container
-
-        from_names = from_names if from_names is not None else []
-        return NamesChooseActivity(view_container, submit_callback, from_names=from_names, max_buttons=max_buttons)
 
     def create_form_view(self, session: Session, form_object, name: str, callback: Callable,
                                  view_container: ViewContainer = None):

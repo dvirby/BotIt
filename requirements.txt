@@ -17,3 +17,4 @@ vobject
 pyyaml
 python-gitlab
 requests[security]
+Levenshtein

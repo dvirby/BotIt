@@ -1,5 +1,5 @@
 from BotFramework.View.telegram_view_container import TelegramViewContainer
-from BotFramework.View.location_view import LocationView
+from BotFramework.View.BaseComponents.location_view import LocationView
 
 
 class TelegramLocationView(LocationView):

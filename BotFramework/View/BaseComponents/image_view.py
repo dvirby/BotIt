@@ -1,6 +1,6 @@
 from __future__ import annotations
 from BotFramework.View.view import View
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 
 
 class ImageView(View):
