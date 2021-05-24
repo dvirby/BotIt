@@ -5,7 +5,7 @@ from Features.SystemFeatures.HierarchicalMenu.Code.menu_node import MenuNode
 from BotFramework.Feature.bot_feature import BotFeature
 from BotFramework.View.view import View
 from BotFramework.session import Session
-from BotFramework.ui.ui import UI
+from BotFramework.UIbase.create_basic_ui import UI
 from APIs.OtherAPIs.DatabaseRelated.User.user import User
 
 from Features.SystemFeatures.HierarchicalMenu.Code.hierarchical_menu import HierarchicalMenu

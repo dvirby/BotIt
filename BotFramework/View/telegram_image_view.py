@@ -1,5 +1,5 @@
 from BotFramework.View.telegram_view_container import TelegramViewContainer
-from BotFramework.View.image_view import ImageView
+from BotFramework.View.BaseComponents.image_view import ImageView
 
 
 class TelegramImageView(ImageView):

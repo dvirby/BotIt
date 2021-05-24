@@ -1,6 +1,6 @@
 from __future__ import annotations
 from BotFramework.View.view import View
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 
 
 class ButtonMatrixView(View):
@@ -13,7 +13,7 @@ class ButtonMatrixView(View):
     def __init__(self, view_container: ViewContainer, text: str = "", buttons = None):
         """
         Creates a new ButtonMatrixView
-        :param ui: The UI to draw with
+        :param UIbase: The UI to draw with
         :param session: The session to draw at (what user to send to?)
         :param text: The text to show above the buttons
         :param buttons: A matrix of buttons to send

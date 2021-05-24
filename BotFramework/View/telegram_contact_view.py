@@ -2,7 +2,7 @@ from typing import Optional
 import vobject
 
 from BotFramework.View.telegram_view_container import TelegramViewContainer
-from BotFramework.View.contact_view import ContactView
+from BotFramework.View.BaseComponents.contact_view import ContactView
 
 
 class TelegramContactView(ContactView):

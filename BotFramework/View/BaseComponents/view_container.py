@@ -2,7 +2,7 @@ from __future__ import annotations
 import typing
 from typing import List
 
-from BotFramework.View.drawable import Drawable
+from BotFramework.View.BaseComponents.drawable import Drawable
 
 if typing.TYPE_CHECKING:
     from BotFramework import Session, UI

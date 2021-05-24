@@ -1,11 +1,11 @@
 from __future__ import annotations
-from typing import Dict, Callable, TYPE_CHECKING
+from typing import Dict, TYPE_CHECKING
 
-from BotFramework.ui.button import Button
+from BotFramework.UIbase.button import Button
 
 if TYPE_CHECKING:
-    from BotFramework.ui.ui import UI
-from BotFramework.View.view_container import ViewContainer
+    from BotFramework.UIbase.create_basic_ui import UI
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 
 from BotFramework.bot_user import BotUser
 from APIs.OtherAPIs.Authentication.secret_code_manager import SecretCodeManager

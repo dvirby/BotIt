@@ -1,11 +1,11 @@
 from __future__ import annotations
 import typing
 
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 
 if typing.TYPE_CHECKING:
     from BotFramework.session import Session
-    from BotFramework.Telegram.telegram_ui import TelegramUI
+    from BotFramework.telegram_complex_ui import TelegramUI
 
 
 class TelegramViewContainer(ViewContainer):

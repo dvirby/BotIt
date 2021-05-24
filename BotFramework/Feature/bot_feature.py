@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Type
 from BotFramework.View.view import View
 from BotFramework.session import Session
-from BotFramework.ui.ui import UI
+from BotFramework.UIbase.create_basic_ui import UI
 from APIs.ExternalAPIs.Scheduler.scheduler import ScheduledJob
 from BotFramework.bot_user import BotUser
 

@@ -2,7 +2,7 @@ from BotFramework import *
 from BotFramework.Feature.bot_feature import BotFeature
 from BotFramework.View.view import View
 from BotFramework.session import Session
-from BotFramework.ui.ui import UI
+from BotFramework.UIbase.create_basic_ui import UI
 from APIs.ExternalAPIs import *
 from APIs.OtherAPIs.DatabaseRelated.User.user import User
 from Features.library.Logic.Book import Book
@@ -26,10 +26,10 @@ class feature_test17321(BotFeature):
         :param session: Session object
         :return: nothing
         """
-        # buttons = [self.ui.create_button_view("ספריית עיון", self.sifreyIun),
-        #            self.ui.create_button_view("ספריית לימוד", self.sifreyLimud)]
+        # buttons = [self.UIbase.create_button_view("ספריית עיון", self.sifreyIun),
+        #            self.UIbase.create_button_view("ספריית לימוד", self.sifreyLimud)]
         buttons = [self.ui.create_button_view("ספריית עיון", self.sifreyIun)]
-                   # self.ui.create_button_view("ספריית לימוד", self.sifreyLimud)]
+                   # self.UIbase.create_button_view("ספריית לימוד", self.sifreyLimud)]
 
         buttons_list = self.ui.create_button_group_view(session, "איזו ספריה אתה מעוניין?", buttons)
         buttons_list.draw()

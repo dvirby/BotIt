@@ -1,19 +1,7 @@
-import sched
 import threading
-from datetime import date
-
-from requests import session
-
 from BotFramework import *
-from BotFramework.Activity.FormActivity.form_activity import FormActivity
 from APIs.ExternalAPIs import *
-from APIs.TalpiotAPIs import *
-from BotFramework.Feature.bot_feature import BotFeature
-from BotFramework.View.view import View
-from BotFramework.session import Session
-from BotFramework.ui.ui import UI, Button
-from APIs.TalpiotAPIs.User.user import User
-from Features.SystemFeatures.HierarchicalMenu.Code.menu_node import MenuNode
+from APIs.OtherAPIs import *
 
 
 class Reminder(BotFeature):

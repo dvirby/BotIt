@@ -3,11 +3,11 @@ from typing import Callable
 from datetime import date, datetime
 import calendar
 
-from BotFramework.View.button_matrix_view import ButtonMatrixView
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.button_matrix_view import ButtonMatrixView
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 from BotFramework.session import Session
 from BotFramework.Activity.activity import Activity
-from BotFramework.ui.button import Button
+from BotFramework.UIbase.button import Button
 from dateutil.relativedelta import relativedelta
 
 
@@ -29,7 +29,7 @@ class DateChooseView(Activity):
                  chosen_date: date = None, title: str = "בחר תאריך"):
         """
         Initializes a new DateChooseView.
-        :param ui: The UI to send throught
+        :param UIbase: The UI to send throught
         :param session: The Session to use (what user to send to?)
         :param choose_callback: Choose callback to notify once a date was chosen
         :param chosen_date: Allows to set a default chosen date

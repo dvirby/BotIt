@@ -2,7 +2,7 @@ import sys
 import traceback
 from typing import Callable
 
-from BotFramework.ui.ui import UI
+from BotFramework.UIbase.create_basic_ui import UI
 import rstr
 from BotFramework.session import Session
 from APIs.ExternalAPIs.Mail.system_mail_client import MailClient

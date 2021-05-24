@@ -1,7 +1,7 @@
-from typing import List, Callable, TypeVar, Generic, Dict
+from typing import Callable, TypeVar, Generic, Dict
 
 from BotFramework.Activity.FormActivity.Field.field import Field
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 
 T = TypeVar('T')
 

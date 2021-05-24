@@ -1,6 +1,6 @@
 import telegram
 
-from BotFramework.View.button_group_view import ButtonGroupView
+from BotFramework.View.BaseComponents.button_group_view import ButtonGroupView
 from BotFramework.View.telegram_view_container import TelegramViewContainer
 
 

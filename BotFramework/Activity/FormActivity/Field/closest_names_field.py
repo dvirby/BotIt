@@ -3,7 +3,7 @@ from typing import Dict, TypeVar, Generic, Callable
 from BotFramework.Activity.names_choose_activity import NamesChooseActivity
 from BotFramework.session import Session
 from BotFramework.Activity.FormActivity.Field.field import Field
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 
 T = TypeVar('T')
 

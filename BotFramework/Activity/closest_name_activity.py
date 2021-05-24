@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import Callable, Dict, Optional
 from fuzzywuzzy import process
-from BotFramework.View.button_matrix_view import ButtonMatrixView
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.button_matrix_view import ButtonMatrixView
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 from BotFramework.session import Session
 from BotFramework.Activity.activity import Activity
 from APIs.Tools.ClosestStrings.closest_strings import get_closest_strings
@@ -17,7 +17,7 @@ class ClosestNameActivity(Activity):
     def __init__(self, view_container: ViewContainer, data: Dict[str, object], key: str, count: int, choose_callback: Callable[[Session, ClosestNameActivity, object], None], try_again: Optional[Callable[[Session], None]] = None, cancel: Optional[Callable[[Session, ClosestNameActivity], None]] = None):
         """
         Initializes a new DateChooseView.
-        :param ui: The UI to send through
+        :param UIbase: The UI to send through
         :param session: The Session to use (what user to send to?)
         :param choose_callback: Choose callback to notify once a date was chosen
         :param data: Map from objects to the strings that describe them. On choose_callback, an object from data.keys() will be returned.

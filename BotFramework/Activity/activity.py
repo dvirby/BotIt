@@ -1,6 +1,6 @@
 from abc import abstractmethod
-from BotFramework.View.drawable import Drawable
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.drawable import Drawable
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 
 
 class Activity(Drawable):
@@ -8,7 +8,7 @@ class Activity(Drawable):
     def __init__(self, view_container: ViewContainer):
         """
         Create a view that will be drawn using the given UI and belong to the given session
-        :param ui: ui to draw the view on when draw() is called
+        :param UIbase: UIbase to draw the view on when draw() is called
         :param session: session this view belongs to
         """
         self.view_container = view_container
@@ -16,7 +16,7 @@ class Activity(Drawable):
 
     def draw(self):
         """
-        Draw this view on the ui
+        Draw this view on the UIbase
         """
         if self.view_container is not None:
             self.view_container.views.append(self)
@@ -40,7 +40,7 @@ class Activity(Drawable):
 
     def remove(self) -> bool:
         """
-        Remove this view from the session and from the ui
+        Remove this view from the session and from the UIbase
         :return: True if the removal succeeded and False otherwise.
         """
         if not self.drawn:
@@ -54,6 +54,6 @@ class Activity(Drawable):
     @abstractmethod
     def remove_raw(self):
         """
-        Remove the actual message from the ui. subclass responsibility.
+        Remove the actual message from the UIbase. subclass responsibility.
         """
         pass

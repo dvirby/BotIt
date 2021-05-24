@@ -1,7 +1,7 @@
 from typing import Callable
 from telegram import File
 from BotFramework.Activity.FormActivity.Field.field import Field
-from BotFramework.View.view_container import ViewContainer
+from BotFramework.View.BaseComponents.view_container import ViewContainer
 
 
 class PictureField(Field[File]):

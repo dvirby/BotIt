@@ -1,7 +1,5 @@
-import telegram
-
 from BotFramework.View.telegram_view_container import TelegramViewContainer
-from BotFramework.View.dice_view import DiceView
+from BotFramework.View.BaseComponents.dice_view import DiceView
 import telegram
 
 
