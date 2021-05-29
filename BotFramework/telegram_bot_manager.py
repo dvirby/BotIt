@@ -101,6 +101,7 @@ class TelegramBotManager(BotManager):
         user.email = str(form.eMail.value)
         user.name = str(form.name.value)
         user.save()
+        self.ui.create_text_view(session, "You are registered!").draw()
 
     @run_async
     def command_handler(self, update: Update, context: CallbackContext):
@@ -111,7 +112,8 @@ class TelegramBotManager(BotManager):
             try:
                 user = self.user_type.get_by_telegram_id(update.effective_user.id)
                 session = self.ui.create_session("register", user)
-                self.ui.create_text_view(session,"You already have user! press /list").draw()
+                self.ui.create_form_view(session, UserDetailesForm(), "please insert the following details:",
+                                         self.func1).draw()
             except:
                 user = User()
                 user.telegram_id = update.effective_chat.id
@@ -119,7 +121,6 @@ class TelegramBotManager(BotManager):
                 session = self.ui.create_session("register", user)
                 self.ui.create_form_view(session, UserDetailesForm(), "please insert the following details:",
                                          self.func1).draw()
-
 
         """
         A message handler for getting commands
@@ -149,16 +150,11 @@ class TelegramBotManager(BotManager):
             print(f"UNKNOWN ID: {update.effective_user.id}")
             raise Exception("ERROR - USER IS NONE" + f"UNKNOWN ID: {update.effective_user.id}")
 
-
-
         if update.message.text == '/list':
-            #if isRegistered:
-                from Features.SystemFeatures.HierarchicalMenu.Code.hierarchical_menu import HierarchicalMenu
-                self.raw_api_bot.delete_message(user.telegram_id, update.message.message_id)
+            from Features.SystemFeatures.HierarchicalMenu.Code.hierarchical_menu import HierarchicalMenu
+            self.raw_api_bot.delete_message(user.telegram_id, update.message.message_id)
 
-                HierarchicalMenu.run_menu(self.ui, user)
-            #else:
-            #    pass
+            HierarchicalMenu.run_menu(self.ui, user)
 
         if update.message.text in self._custom_features:
             self.ui.clear_feature_sessions_user(update.message.text, user)

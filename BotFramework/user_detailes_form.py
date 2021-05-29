@@ -7,8 +7,9 @@ class UserDetailesForm:
     BAD_NAME = "check your name"
 
     def __init__(self):
-        self.eMail = TextField(name="E-mail", msg="What is your E-mail?")
-        self.name = TextField(name="Name", msg="What is your name?")
+        # check that fields are same in user.
+        self.eMail = TextField(name="email", msg="What is your E-mail?")
+        self.name = TextField(name="name", msg="What is your name?")
 
     def validate(self):
         if self.eMail.value is None:

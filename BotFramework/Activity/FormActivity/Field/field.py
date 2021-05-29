@@ -84,3 +84,6 @@ class Field(Generic[T]):
 
         self.hide_callback = None
         self.update_callback = None
+
+    def set_value(self, value):
+        self.value = value
