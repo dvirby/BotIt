@@ -1,6 +1,9 @@
 from APIs.ExternalAPIs import *
+from APIs.OtherAPIs.Constraint.UserConstraint.user_constraint import MachzorConstraint, \
+    UserConstraint
 from BotFramework.Feature.bot_feature import BotFeature
 from BotFramework.View.view import View
+from BotFramework.create_group_form import AdminRegisterForm
 from BotFramework.session import Session
 from BotFramework.ui.ui import UI
 from APIs.OtherAPIs.DatabaseRelated.User.user import User
@@ -27,13 +30,25 @@ class Change_Profile(BotFeature):
         """
         self.ui.create_form_view(session, UserDetailesForm(), "please insert the following details:",
                                  self.func1).draw()
-
     def func1(self, session: Session, form_activity: FormActivity, form: UserDetailesForm):
         user = session.user
         user.email = str(form.eMail.value)
         user.name = str(form.name.value)
         user.save()
+        if form.is_admin.value == ['yes']:
+            self.ui.create_text_view(session, "What is the admin password?").draw()
+            self.ui.get_text(session, self.passwordCorrect)
+        else:
+            self.ui.create_text_view(session, "You are registered!").draw()
 
+    def passwordCorrect(self, session, text):
+        if str(text) == '123456789':
+            user = session.user
+            user.role.append('bot_admin')
+            user.save()
+            self.ui.create_text_view(session, "You are registered as admin!").draw()
+        else:
+            self.ui.create_text_view(session, "Wrong password!").draw()
 
 
     def get_summarize_views(self, session: Session) -> [View]:

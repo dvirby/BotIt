@@ -1,19 +1,16 @@
+from BotFramework import *
 from APIs.ExternalAPIs import *
-from BotFramework.Feature.bot_feature import BotFeature
-from BotFramework.View.view import View
-from BotFramework.session import Session
-from BotFramework.ui.ui import UI
-from APIs.OtherAPIs.DatabaseRelated.User.user import User
+from APIs import *
+from APIs.OtherAPIs.DatabaseRelated import User
+from BotFramework.Activity import FormActivity
+from BotFramework.create_group_form import CreateGroupForm
+from APIs.OtherAPIs.DatabaseRelated.Group import groups
 
-hisID = ""
-hisPwd = ""
-hisSchool = ""
-class Groups(BotFeature):
+class CreateNewGroup(BotFeature):
 
     # init the class and call to super init - The same for every feature
     def __init__(self, ui: UI):
         super().__init__(ui)
-
 
     def main(self, session: Session):
         """
@@ -23,14 +20,12 @@ class Groups(BotFeature):
         :param session: Session object
         :return: nothing
         """
-        buttons = []
-        buttons.append(self.ui.create_button_view())
-        pass
+        self.ui.create_form_view(session, CreateGroupForm(), "please insert the following details:",
+                         self.func1).draw()
 
-
-
-
-
+    def func1(self, session: Session, form_activity: FormActivity, form: CreateGroupForm):
+        groups.create_new_group(str(form.groupName.value), str(form.description.value), form.participants.value, [])
+        self.ui.create_text_view(session, "Group successfully created!").draw()
 
 
     def get_summarize_views(self, session: Session) -> [View]:
@@ -49,7 +44,7 @@ class Groups(BotFeature):
         :param user: the user to test
         :return: True if access should be allowed, false if should be restricted.
         """
-        return "מתלם" in user.role
+        return "bot_admin" in user.role
 
     def get_scheduled_jobs(self) -> [ScheduledJob]:
         """

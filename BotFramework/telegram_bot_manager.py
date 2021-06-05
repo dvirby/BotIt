@@ -1,6 +1,9 @@
 import logging
 from typing import Union, Dict, Type
 import telegram
+
+from APIs.OtherAPIs.Constraint.UserConstraint.user_constraint import UserConstraint, \
+    MachzorConstraint
 from BotFramework.bot_user import BotUser
 from telegram.update import Update
 from telegram.ext import Updater, Filters, CallbackContext
@@ -17,7 +20,7 @@ from BotFramework.session import Session
 from BotFramework.bot_logger import BotLogger
 from BotFramework.user_detailes_form import UserDetailesForm
 from BotFramework.Activity.FormActivity.form_activity import FormActivity
-from APIs.OtherAPIs import User
+from APIs.OtherAPIs.DatabaseRelated import User
 
 class TelegramBotManager(BotManager):
     def __init__(self, token: str, user_type: Type[BotUser]):
@@ -94,26 +97,33 @@ class TelegramBotManager(BotManager):
                             level=logging.INFO)
         self.logger = logging.getLogger(__name__)
 
-
-
     def func1(self, session: Session, form_activity: FormActivity, form: UserDetailesForm):
         user = self.user_type.get_by_telegram_id(session.user.telegram_id)
         user.email = str(form.eMail.value)
         user.name = str(form.name.value)
         user.save()
-        self.ui.create_text_view(session, "You are registered!").draw()
+        if form.is_admin.value == ['yes']:
+            self.ui.create_text_view(session,"What is the admin password?").draw()
+            self.ui.get_text(session, self.passwordCorrect)
+        else:
+            self.ui.create_text_view(session, "You are registered!").draw()
+
+    def passwordCorrect(self, session, text):
+        if str(text) == '123456789':
+            user = self.user_type.get_by_telegram_id(session.user.telegram_id)
+            user.role.append('bot_admin')
+            self.ui.create_text_view(session, "You are registered as admin!").draw()
+        else:
+            self.ui.create_text_view(session, "Wrong password!").draw()
 
     @run_async
     def command_handler(self, update: Update, context: CallbackContext):
-
-
         if update.message.text == '/register':
 
             try:
                 user = self.user_type.get_by_telegram_id(update.effective_user.id)
                 session = self.ui.create_session("register", user)
-                self.ui.create_form_view(session, UserDetailesForm(), "please insert the following details:",
-                                         self.func1).draw()
+                self.ui.create_text_view(session, "You are already registered! press /list").draw()
             except:
                 user = User()
                 user.telegram_id = update.effective_chat.id
@@ -143,8 +153,6 @@ class TelegramBotManager(BotManager):
                 )
 
             return
-
-
         user = self.user_type.get_by_telegram_id(update.effective_user.id)
         if user is None:
             print(f"UNKNOWN ID: {update.effective_user.id}")

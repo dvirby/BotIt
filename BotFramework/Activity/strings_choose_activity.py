@@ -32,7 +32,7 @@ class StringsChooseActivity(Activity):
         self.separator = separator
         self.get_input_text = get_input_text
         self.submit_callback = submit_callback
-        self.all_names = all_options
+        self.all_names = get_input_text
         self.max_buttons = max_buttons
         self.raw_object = None
         self.strings_chosen = []
