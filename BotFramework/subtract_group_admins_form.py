@@ -11,7 +11,7 @@ class SubtractGroupAdmins:
         users = UserConstraint.get_users_with_constraint(MachzorConstraint(User.mahzor))
         toAdd = []
         for u in users:
-            if u in group:
+            if (u in group and u in group.admins) and 'bot_admin' not in u.role:
                 toAdd.append(u)
 
         self.AddedA = CheckBoxField(name="add", msg="What admins do you want to make not admins?", options=toAdd)

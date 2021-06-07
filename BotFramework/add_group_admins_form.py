@@ -11,10 +11,10 @@ class AddGroupAdmins:
         users = UserConstraint.get_users_with_constraint(MachzorConstraint(User.mahzor))
         toAdd = []
         for u in users:
-            if u in group:
+            if u in group and u not in group.admins:
                 toAdd.append(u)
 
         self.AddedA = CheckBoxField(name="add", msg="Who do you want to make admin?", options=toAdd)
 
     def validate(self):
-        pass
+        return True
