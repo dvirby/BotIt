@@ -16,8 +16,6 @@ class User(Document):
     meta = {'collection': 'users_info'}
     email: str = StringField()
     name: str = StringField(max_length=100)
-    adminPassword: str = StringField()
-    adminUsername: str = StringField()
     mahzor: int = IntField()
     gender: str = StringField(max_length=10)
     # todo use from typing import __future__
