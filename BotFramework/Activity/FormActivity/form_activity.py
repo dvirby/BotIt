@@ -7,7 +7,6 @@ from BotFramework.View.BaseComponents.view_container import ViewContainer
 from BotFramework.session import Session
 from BotFramework.Activity.activity import Activity
 
-
 class FormActivity(Activity):
     """
     Presents the user a list of buttons for choosing an amount of strings similar to an input string from
@@ -48,14 +47,23 @@ class FormActivity(Activity):
         for field_name, field in self.formObject.__dict__.items():
             #  Generate the row of the field: One cell with the name,
             #  and second cell with the value.
+            
             #  on click on one of the fields will trigger the callback
             #  that shows the input view of the field.
             show_input_callback = self._generate_show_input_view_callback(field, count)
 
             #  Get the human readable value, if it exists
+
+            user = self.view_container.session.user
             title = field.human_readable_value()
-            if title is None:
-                title = FormActivity.EMPTY_ANSWER
+
+            for i in user._data:
+                if field.name == i:
+                    title = user._data[i]
+                    field.set_value(user._data[i])
+
+            if title == None:
+                title = self.EMPTY_ANSWER
 
             #  Generate the row
             buttons = [

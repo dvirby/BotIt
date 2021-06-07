@@ -16,8 +16,7 @@ class UserConstraint(ABC):
         users = User.objects
         res = []
         for u in users:
-            if constraint.satisfied(u):
-                res.append(u)
+            res.append(u)
         return res
 
 

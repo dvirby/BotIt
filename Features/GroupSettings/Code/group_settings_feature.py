@@ -1,19 +1,14 @@
+from BotFramework import *
 from APIs.ExternalAPIs import *
-from BotFramework.Feature.bot_feature import BotFeature
-from BotFramework.View.view import View
-from BotFramework.session import Session
-from BotFramework.UIbase.create_basic_ui import UI
-from APIs.OtherAPIs.DatabaseRelated.User.user import User
+from APIs import *
+#from APIs import get_user_groups
+from APIs.OtherAPIs.DatabaseRelated import User
 
-hisID = ""
-hisPwd = ""
-hisSchool = ""
-class back_nadav(BotFeature):
+class GroupSettings(BotFeature):
 
     # init the class and call to super init - The same for every feature
     def __init__(self, ui: UI):
         super().__init__(ui)
-
 
     def main(self, session: Session):
         """
@@ -23,8 +18,8 @@ class back_nadav(BotFeature):
         :param session: Session object
         :return: nothing
         """
-        pass
-
+#        my_groups = get_user_groups(user=session.user)
+#        self.show_groups(session, my_groups)
 
 
 
@@ -44,7 +39,7 @@ class back_nadav(BotFeature):
         :param user: the user to test
         :return: True if access should be allowed, false if should be restricted.
         """
-        return "מתלם" in user.role
+        return "admin" in user.role
 
     def get_scheduled_jobs(self) -> [ScheduledJob]:
         """
