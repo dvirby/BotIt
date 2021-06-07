@@ -1,13 +1,10 @@
 from APIs.ExternalAPIs import *
-from APIs.OtherAPIs.Constraint.UserConstraint.user_constraint import MachzorConstraint, \
-    UserConstraint
 from BotFramework.Feature.bot_feature import BotFeature
 from BotFramework.View.view import View
-from BotFramework.create_group_form import AdminRegisterForm
 from BotFramework.session import Session
 from BotFramework.ui.ui import UI
 from APIs.OtherAPIs.DatabaseRelated.User.user import User
-from BotFramework.user_detailes_form import UserDetailesForm
+from APIs.OtherAPIs.DatabaseRelated.User.user_detailes_form import UserDetailesForm
 from BotFramework.Activity.FormActivity.form_activity import FormActivity
 
 hisID = ""

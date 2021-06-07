@@ -2,8 +2,6 @@ import logging
 from typing import Union, Dict, Type
 import telegram
 
-from APIs.OtherAPIs.Constraint.UserConstraint.user_constraint import UserConstraint, \
-    MachzorConstraint
 from BotFramework.bot_user import BotUser
 from telegram.update import Update
 from telegram.ext import Updater, Filters, CallbackContext
@@ -18,7 +16,7 @@ from BotFramework.telegram_ui import TelegramUI
 from BotFramework.crash_logger import log_all_exceptions
 from BotFramework.session import Session
 from BotFramework.bot_logger import BotLogger
-from BotFramework.user_detailes_form import UserDetailesForm
+from APIs.OtherAPIs.DatabaseRelated.User.user_detailes_form import UserDetailesForm
 from BotFramework.Activity.FormActivity.form_activity import FormActivity
 from APIs.OtherAPIs.DatabaseRelated import User
 
