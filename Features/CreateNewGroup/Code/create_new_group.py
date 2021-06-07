@@ -1,9 +1,8 @@
 from BotFramework import *
 from APIs.ExternalAPIs import *
-from APIs import *
 from APIs.OtherAPIs.DatabaseRelated import User
 from BotFramework.Activity import FormActivity
-from BotFramework.create_group_form import CreateGroupForm
+from APIs.OtherAPIs.DatabaseRelated.Group.create_group_form import CreateGroupForm
 from APIs.OtherAPIs.DatabaseRelated.Group import groups
 
 class CreateNewGroup(BotFeature):

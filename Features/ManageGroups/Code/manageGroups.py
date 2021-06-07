@@ -7,10 +7,10 @@ from BotFramework.ui.ui import UI
 from APIs.OtherAPIs.DatabaseRelated.User.user import User
 from APIs.OtherAPIs.DatabaseRelated.Group import groups
 from APIs.OtherAPIs.DatabaseRelated.Group.group import Group
-from BotFramework.add_group_participants_form import AddGroupParticipants
-from BotFramework.subtract_group_participants_form import SubtractGroupParticipants
-from BotFramework.add_group_admins_form import AddGroupAdmins
-from BotFramework.subtract_group_admins_form import SubtractGroupAdmins
+from APIs.OtherAPIs.DatabaseRelated.Group.add_group_participants_form import AddGroupParticipants
+from APIs.OtherAPIs.DatabaseRelated.Group.subtract_group_participants_form import SubtractGroupParticipants
+from APIs.OtherAPIs.DatabaseRelated.Group.add_group_admins_form import AddGroupAdmins
+from APIs.OtherAPIs.DatabaseRelated.Group.subtract_group_admins_form import SubtractGroupAdmins
 
 class ManageGroups(BotFeature):
 
