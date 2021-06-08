@@ -8,9 +8,9 @@ from APIs.OtherAPIs.DatabaseRelated.User.user import User
 from APIs.OtherAPIs.DatabaseRelated.Group import groups
 from APIs.OtherAPIs.DatabaseRelated.Group.group import Group
 from APIs.OtherAPIs.DatabaseRelated.Group.add_group_participants_form import AddGroupParticipants
-from APIs.OtherAPIs.DatabaseRelated.Group.subtract_group_participants_form import SubtractGroupParticipants
+from APIs.OtherAPIs.DatabaseRelated.Group.remove_group_participants_form import RemoveGroupParticipants
 from APIs.OtherAPIs.DatabaseRelated.Group.add_group_admins_form import AddGroupAdmins
-from APIs.OtherAPIs.DatabaseRelated.Group.subtract_group_admins_form import SubtractGroupAdmins
+from APIs.OtherAPIs.DatabaseRelated.Group.remove_group_admins_form import RemoveGroupAdmins
 
 class ManageGroups(BotFeature):
 
@@ -28,7 +28,7 @@ class ManageGroups(BotFeature):
         """
         buttons = []
         for group in groups.get_user_groups(session.user):
-            buttons.append(self.ui.create_button_view(group.name, lambda s: self.show_small_menu(group,session)))
+            buttons.append(self.ui.create_button_view(group.name, lambda s: self.show_small_menu(group, session)))
         self.ui.create_button_group_view(session, "What group do you want to change?", buttons).draw()
 
     def show_small_menu(self, group: Group, session: Session):
@@ -38,7 +38,7 @@ class ManageGroups(BotFeature):
         buttons.append(self.ui.create_button_view("Change group name", lambda s: self.change_name(group, session)))
         buttons.append(self.ui.create_button_view("Change group description", lambda s: self.change_description(group, session)))
         buttons.append(self.ui.create_button_view("Add participants", lambda s: self.add_participants(group, session)))
-        buttons.append(self.ui.create_button_view("Subtract participants", lambda s: self.subtract_participants(group, session)))
+        buttons.append(self.ui.create_button_view("Subtract participants", lambda s: self.remove_participants(group, session)))
         buttons.append(self.ui.create_button_view("Add admins", lambda s: self.add_admins(group, session)))
         buttons.append(self.ui.create_button_view("Subtract admins", lambda s: self.subtract_admins(group, session)))
         self.ui.create_button_group_view(session, "What do you want to do?", buttons).draw()
@@ -55,13 +55,13 @@ class ManageGroups(BotFeature):
         form = AddGroupParticipants(group)
         self.ui.create_form_view(session, form, "Add participants", self.addedP).draw()
 
-    def subtract_participants(self, group, session):
-        form = SubtractGroupParticipants(group)
-        self.ui.create_form_view(session, form, "Subtract paticipants", self.subtractedP).draw()
+    def remove_participants(self, group, session):
+        form = RemoveGroupParticipants(group)
+        self.ui.create_form_view(session, form, "Remove participants", self.removedP).draw()
 
     def subtract_admins(self, group, session):
-        form = SubtractGroupAdmins(group)
-        self.ui.create_form_view(session, form, "Make non-admins", self.SubtractedA).draw()
+        form = RemoveGroupAdmins(group)
+        self.ui.create_form_view(session, form, "Make non-admins", self.RemovedA).draw()
 
     def add_admins(self, group, session):
         form = AddGroupAdmins(group)
@@ -78,9 +78,9 @@ class ManageGroups(BotFeature):
                 new_participants.append(u)
         group2.participants = new_participants
         group2.save()
-        self.ui.create_text_view(session, "Participants successfully added!").draw()
+        self.ui.create_text_view(session, "Participants successfully added! press /list").draw()
 
-    def subtractedP(self, session: Session, form_activity: FormActivity, form: SubtractGroupParticipants):
+    def removedP(self, session: Session, form_activity: FormActivity, form: RemoveGroupParticipants):
         global group2
         users = UserConstraint.get_users_with_constraint(MachzorConstraint(session.user.mahzor))
         new_participants = []
@@ -103,7 +103,7 @@ class ManageGroups(BotFeature):
         group2.participants = new_participants
         group2.admins = new_admmins
         group2.save()
-        self.ui.create_text_view(session, "Participants successfully subtracted!").draw()
+        self.ui.create_text_view(session, "Participants successfully subtracted! press /list").draw()
 
     def AddedA(self, session: Session, form_activity: FormActivity, form: AddGroupAdmins):
         global group2
@@ -117,9 +117,9 @@ class ManageGroups(BotFeature):
                     u.save()
         group2.admins = new_participants
         group2.save()
-        self.ui.create_text_view(session, "Admins successfully added!").draw()
+        self.ui.create_text_view(session, "Admins successfully added! press /list").draw()
 
-    def SubtractedA(self, session: Session, form_activity: FormActivity, form: SubtractGroupAdmins):
+    def RemovedA(self, session: Session, form_activity: FormActivity, form: RemoveGroupAdmins):
         global group2
         users = UserConstraint.get_users_with_constraint(MachzorConstraint(session.user.mahzor))
         new_participants = []
@@ -137,19 +137,19 @@ class ManageGroups(BotFeature):
                         u.save()
         group2.admins = new_participants
         group2.save()
-        self.ui.create_text_view(session, "Admins successfully subtracted!").draw()
+        self.ui.create_text_view(session, "Admins successfully removed! press /list").draw()
 
     def newName(self, session, text):
         global group2
         group2.name = text
         group2.save()
-        self.ui.create_text_view(session, "Name successfully changed").draw()
+        self.ui.create_text_view(session, "Name successfully changed! press /list").draw()
 
     def newDes(self, session, text):
         global group2
         group2.description = text
         group2.save()
-        self.ui.create_text_view(session, "Description successfully changed").draw()
+        self.ui.create_text_view(session, "Description successfully changed! press /list").draw()
 
 
 
@@ -160,11 +160,6 @@ class ManageGroups(BotFeature):
     def is_authorized(self, user: User) -> bool:
         return "group_admin" in user.role or "bot_admin" in user.role
 
-    def get_summarize_views(self, session: Session) -> [View]:
-        return list()
-
-    def get_command(self) -> str:
-        return "vidutz"
 
     def get_scheduled_jobs(self):
         return list()

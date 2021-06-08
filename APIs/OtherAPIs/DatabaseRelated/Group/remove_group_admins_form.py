@@ -5,16 +5,16 @@ from BotFramework.Activity.FormActivity.Field import CheckBoxField
 from BotFramework.Activity.FormActivity.form_activity import FormActivity
 
 
-class SubtractGroupParticipants:
+class RemoveGroupAdmins:
 
     def __init__(self, group):
         users = UserConstraint.get_users_with_constraint(MachzorConstraint(User.mahzor))
         toAdd = []
         for u in users:
-            if u in group:
+            if (u in group and u in group.admins) and 'bot_admin' not in u.role:
                 toAdd.append(u)
 
-        self.AddedP = CheckBoxField(name="subtract", msg="Who do you want to subtract?", options=toAdd)
+        self.AddedA = CheckBoxField(name="add", msg="What admins do you want to make not admins?", options=toAdd)
 
     def validate(self):
         pass

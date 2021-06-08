@@ -23,7 +23,7 @@ class CreateNewGroup(BotFeature):
                          self.func1).draw()
 
     def func1(self, session: Session, form_activity: FormActivity, form: CreateGroupForm):
-        groups.create_new_group(str(form.groupName.value), str(form.description.value), form.participants.value, [])
+        groups.create_new_group(str(form.groupName.value), str(form.description.value), form.participants.value, [session.user])
         self.ui.create_text_view(session, "Group successfully created!").draw()
 
 
