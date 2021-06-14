@@ -17,7 +17,7 @@ from BotFramework.session import Session
 from BotFramework.bot_logger import BotLogger
 from BotFramework.Activity.FormActivity.form_activity import FormActivity
 from APIs.OtherAPIs import User
-from BotFramework.user_detailes_form import UserDetailesForm
+from APIs.OtherAPIs.DatabaseRelated.User.user_detailes_form import UserDetailesForm
 
 
 class BotManager(ABC):
@@ -97,10 +97,11 @@ class BotManager(ABC):
 
 
 
-    def func1(self, session: Session, form_activity: FormActivity, form: UserDetailesForm):
+    def register(self, session: Session, form_activity: FormActivity, form: UserDetailesForm):
         user = self.user_type.get_by_telegram_id(session.user.telegram_id)
         user.email = str(form.eMail.value)
         user.name = str(form.name.value)
+        user.phone_number = str(form.phone.value)
         user.save()
 
     @run_async
@@ -119,7 +120,7 @@ class BotManager(ABC):
                 user.save()
                 session = self.ui.create_session("register", user)
                 self.ui.create_form_view(session, UserDetailesForm(), "please insert the following details:",
-                                         self.func1).draw()
+                                         self.register).draw()
 
 
         """

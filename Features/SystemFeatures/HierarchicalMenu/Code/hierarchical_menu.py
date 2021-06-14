@@ -64,7 +64,7 @@ class HierarchicalMenu(BotFeature):
                 self.ui.create_button_view("🔙", lambda new_session: self.show_menu(new_session, node.parent))
             )
 
-        new_message = self.ui.create_button_group_view(session, "תפריט " + node.display_name + ":", buttons)
+        new_message = self.ui.create_button_group_view(session, node.display_name + " menu"+ ":", buttons)
         if SESSION_VAR_LAST_VIEW not in session.data:
             new_message.draw()
             session.data[SESSION_VAR_LAST_VIEW] = new_message

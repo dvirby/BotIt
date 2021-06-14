@@ -16,16 +16,9 @@ class User(Document):
     meta = {'collection': 'users_info'}
     email: str = StringField()
     name: str = StringField(max_length=100)
-    mahzor: int = IntField()
     gender: str = StringField(max_length=10)
-    # todo use from typing import __future__
-    team_commander: User = ReferenceField('self')
-    mahzor_commander: User = ReferenceField('self')
     phone_number: str = StringField()
     telegram_id: int = LongField()
-    mahzor_admin: bool = BooleanField()
-    bot_admin: bool = BooleanField()
-    special_attributes: dict = DictField()
     birthday: datetime.date = DateField()
     role: [str] = ListField(default=["מתלם"])
     secret_code: str = StringField()

@@ -329,5 +329,6 @@ class UI(ABC):
                     view.draw()
                 except Exception as e:
                     import traceback
+                    print(e)
                     print("ERROR - couldn't draw the summary of a session.")
                     print("This error was ignored and the view was not drawn, to avoid crashing the bot")

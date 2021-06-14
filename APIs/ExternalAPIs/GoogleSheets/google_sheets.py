@@ -5,7 +5,7 @@ import os
 #  If modifying this scopes, delete token.json
 from APIs.System import Settings
 
-SCOPES_SHEETS = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+SCOPES_SHEETS = ['https://www.googleapis.com/auth/spreadsheets']
 
 VALUE_INPUT_OPTION_USER_ENTERED = "USER_ENTERED"
 VALUE_INPUT_OPTION_RAW = "RAW"
