@@ -13,8 +13,8 @@ class FormActivity(Activity):
     a database of a lot of strings.
     """
 
-    EMPTY_ANSWER = "הכנס תשובה"
-    SEND_FORM = "שלח טופס"
+    EMPTY_ANSWER = "enter an answer"
+    SEND_FORM = "send form"
 
     class ValidationException(Exception):
         def __init__(self, message: str):

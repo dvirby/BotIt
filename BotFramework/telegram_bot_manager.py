@@ -20,6 +20,7 @@ from APIs.OtherAPIs.DatabaseRelated.User.user_detailes_form import UserDetailesF
 from BotFramework.Activity.FormActivity.form_activity import FormActivity
 from APIs.OtherAPIs.DatabaseRelated import User
 
+
 class TelegramBotManager(BotManager):
     def __init__(self, token: str, user_type: Type[BotUser]):
         self.token = token
@@ -101,7 +102,7 @@ class TelegramBotManager(BotManager):
         user.name = str(form.name.value)
         user.save()
         if form.is_admin.value == ['yes']:
-            self.ui.create_text_view(session,"What is the admin password?").draw()
+            self.ui.create_text_view(session, "What is the admin password?").draw()
             self.ui.get_text(session, self.passwordCorrect)
         else:
             self.ui.create_text_view(session, "You are registered!").draw()
@@ -110,6 +111,7 @@ class TelegramBotManager(BotManager):
         if str(text) == '123456789':
             user = self.user_type.get_by_telegram_id(session.user.telegram_id)
             user.role.append('bot_admin')
+            user.save()
             self.ui.create_text_view(session, "You are registered as admin!").draw()
         else:
             self.ui.create_text_view(session, "Wrong password!").draw()
@@ -123,7 +125,7 @@ class TelegramBotManager(BotManager):
                 session = self.ui.create_session("register", user)
                 self.ui.create_text_view(session, "You are already registered! press /list").draw()
             except:
-                user = User()
+                user = User.user.User()
                 user.telegram_id = update.effective_chat.id
                 user.save()
                 session = self.ui.create_session("register", user)
@@ -151,27 +153,37 @@ class TelegramBotManager(BotManager):
                 )
 
             return
-        user = self.user_type.get_by_telegram_id(update.effective_user.id)
-        if user is None:
-            print(f"UNKNOWN ID: {update.effective_user.id}")
-            raise Exception("ERROR - USER IS NONE" + f"UNKNOWN ID: {update.effective_user.id}")
 
-        if update.message.text == '/list':
-            from Features.SystemFeatures.HierarchicalMenu.Code.hierarchical_menu import HierarchicalMenu
-            self.raw_api_bot.delete_message(user.telegram_id, update.message.message_id)
+        try:
+            user = self.user_type.get_by_telegram_id(update.effective_user.id)
 
-            HierarchicalMenu.run_menu(self.ui, user)
 
-        if update.message.text in self._custom_features:
-            self.ui.clear_feature_sessions_user(update.message.text, user)
-            session = self.ui.create_session(update.message.text, user)
+            # user = self.user_type.get_by_telegram_id(update.effective_user.id)
+            if user is None:
+                print(f"UNKNOWN ID: {update.effective_user.id}")
+                raise Exception("ERROR - USER IS NONE" + f"UNKNOWN ID: {update.effective_user.id}")
 
-            self.raw_api_bot.delete_message(user.telegram_id, update.message.message_id)
-            self.ui.create_text_view(session, "אתה מריץ פקודה במצב טסטים.").draw()
-            feature = self._custom_features[update.message.text]
+            if update.message.text == '/list':
+                from Features.SystemFeatures.HierarchicalMenu.Code.hierarchical_menu import HierarchicalMenu
+                self.raw_api_bot.delete_message(user.telegram_id, update.message.message_id)
 
-            log_all_exceptions(
-                lambda: feature.main(session),
-                session,
-                self.ui
-            )
+                HierarchicalMenu.run_menu(self.ui, user)
+
+            if update.message.text in self._custom_features:
+                self.ui.clear_feature_sessions_user(update.message.text, user)
+                session = self.ui.create_session(update.message.text, user)
+
+                self.raw_api_bot.delete_message(user.telegram_id, update.message.message_id)
+                self.ui.create_text_view(session, "אתה מריץ פקודה במצב טסטים.").draw()
+                feature = self._custom_features[update.message.text]
+
+                log_all_exceptions(
+                    lambda: feature.main(session),
+                    session,
+                    self.ui
+                )
+        except:
+            user = User.user.User()
+            user.telegram_id = update.effective_chat.id
+            session = self.ui.create_session("Not registered", user)
+            self.ui.create_text_view(session, "You are not registered! press /register").draw()

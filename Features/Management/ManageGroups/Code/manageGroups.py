@@ -7,10 +7,10 @@ from BotFramework.UIbase.create_basic_ui import UI
 from APIs.OtherAPIs.DatabaseRelated.User.user import User
 from APIs.OtherAPIs.DatabaseRelated.Group import groups
 from APIs.OtherAPIs.DatabaseRelated.Group.group import Group
-from APIs.OtherAPIs.DatabaseRelated.Group.add_group_participants_form import AddGroupParticipants
-from APIs.OtherAPIs.DatabaseRelated.Group.subtract_group_participants_form import SubtractGroupParticipants
-from APIs.OtherAPIs.DatabaseRelated.Group.add_group_admins_form import AddGroupAdmins
-from APIs.OtherAPIs.DatabaseRelated.Group.subtract_group_admins_form import SubtractGroupAdmins
+from BotFramework.add_group_participants_form import AddGroupParticipants
+from BotFramework.subtract_group_participants_form import SubtractGroupParticipants
+from BotFramework.add_group_admins_form import AddGroupAdmins
+from BotFramework.subtract_group_admins_form import SubtractGroupAdmins
 
 class ManageGroups(BotFeature):
 
@@ -28,7 +28,8 @@ class ManageGroups(BotFeature):
         """
         buttons = []
         for group in groups.get_user_groups(session.user):
-            buttons.append(self.ui.create_button_view(group.name, lambda s: self.show_small_menu(group,session)))
+            if session.user in group.admins:
+                buttons.append(self.ui.create_button_view(group.name, lambda s: self.show_small_menu(group, session)))
         self.ui.create_button_group_view(session, "What group do you want to change?", buttons).draw()
 
     def show_small_menu(self, group: Group, session: Session):
@@ -129,8 +130,8 @@ class ManageGroups(BotFeature):
             else:
                 if len(groups.get_user_groups(u)) > 1:
                     t = 0
-                    for group in groups.get_user_groups(u):
-                        if u in group.admins:
+                    for group in groups.get_user_groups(:u):
+                        if u in group.admins
                             t = t+1
                     if t == 1:
                         u.role.remove('admin')
