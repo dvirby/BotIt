@@ -12,7 +12,7 @@ These needs require sharing between members of the organization, use and retenti
 
 ### `Faster & Easier & Friendlier`
 
-### `Without any waiver on the the bot complexity `
+### `Without any waiver on the complexity `
 
 
 .
