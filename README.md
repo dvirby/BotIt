@@ -1,6 +1,6 @@
 <img src="./other/logo.png">
 
-# Build your first bot with `Bot it API` 🤖
+# Build your first bot with `Bot it API 🤖
 
 ## Why choose Bot it?
 
@@ -10,7 +10,7 @@ These needs require sharing between members of the organization, use and retenti
 
 **With bot it API you will get the same results and even better**
 
-### Faster & Easier
+`Faster & Easier & Friendlier`
 
 ***Without any waiver on the the bot complexity***
 
