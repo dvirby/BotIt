@@ -27,8 +27,8 @@ Moreover, we attach some examples that show the bot ability.
 ## Some features that attached for example:
 
 #### * Mailing lists 📧
-#### * Libary manager 📚�
+#### * Libary manager 📚
 #### * Reminder ⏰
-#### * System to manage washing machines🧺
-#### * Surveys✔️
+#### * System to manage washing machines 🧺
+#### * Surveys ✔️
 
