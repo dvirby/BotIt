@@ -1,6 +1,7 @@
 <img src="./other/logo.png">
 
-# Start build your first bot with Bot it API 🤖
+# Start build your first bot with `Bot it API` 🤖
+
 ## Why choose Bot it?
 
 Many organizations need systems that will help manage logistics and various processes so that the use of automation can streamline work.
