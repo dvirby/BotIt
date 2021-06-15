@@ -1,4 +1,4 @@
-<img src="./other/logo.png">
+<center><img src="./other/logo.png"></center>
 
 # Build your first bot with `Bot it API 🤖`
 
