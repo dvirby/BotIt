@@ -1,6 +1,6 @@
 <img src="./other/logo.png">
 
-# Start build your first bot with `Bot it API` 🤖
+# Build your first bot with `Bot it API` 🤖
 
 ## Why choose Bot it?
 
