@@ -10,11 +10,12 @@ These needs require sharing between members of the organization, use and retenti
 
 **With bot it API you will get the same results and even better**
 
-`Faster & Easier & Friendlier`
+### `Faster & Easier & Friendlier`
 
-***Without any waiver on the the bot complexity***
+### `Without any waiver on the the bot complexity `
 
 
+.
 ## What in our API?
 
 In the API you will meet a lot of tools that will help you build your bot in the easiest way
