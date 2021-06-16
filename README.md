@@ -24,6 +24,8 @@ tools like: read and write to sheets, sharing data with users using Database, cr
 3. Now you can read the rest of the wiki to understand how to create features you want
 4. **The best way to write feature is by looking in existing features **
 
+`In a quick look you can see how easy and simple it to write bot with bery strong abilites`
+
 ## Feature for examples
 We provide with the framework features for example and for some of them there is explantion in the wiki
 Use them to learn about the API and other tools !
@@ -32,12 +34,9 @@ Each feature conatin another ability to help you learn about them
 ## Some example features that attached:
 ##### * Libary manager 📚
 ##### * Reminder ⏰
-##### * System to manage washing machines 🧺
+##### ** System to manage washing machines 🧺
 ##### * Surveys ✔️
 ##### * Manage Groups 👥
-
-
-`In a quick look you can see how easy and simple it to write bot with bery strong abilites`
 
 ## What is the difference between python-telegram ibrary and botIt framework?
 
