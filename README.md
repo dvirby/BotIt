@@ -20,9 +20,9 @@ tools like: read and write to sheets, sharing data with users using Database, cr
 
 ## So how do I get started? 
 1. First you will need to install all the framework (that includes the API and tools) [start here](https://github.com/dvirby/BotIt/wiki/Getting-started)
-2. Then create first feature to learn [first feature](https://github.com/dvirby/BotIt/wiki/Create-your-first-feature)
+2. Then create first feature to learn how to write feature [first feature](https://github.com/dvirby/BotIt/wiki/Create-your-first-feature)
 3. Now you can read the rest of the wiki to understand how to create features you want
-# 4. The best way to write feature is by looking in existing features 
+### 4. The best way to write feature is by looking in existing features 
 
 We provide with the framework features for example and for some of them there is explantion in the wiki
 Use them to learn about the API and other tools !
