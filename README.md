@@ -24,7 +24,7 @@ Moreover, we attach some examples that show the bot ability.
 
 (In a quick look you can see how much comfortable and simple the code)
 
-## Some features that attached for example:
+## Some example features that attached:
 
 #### * Mailing lists 📧
 #### * Libary manager 📚
