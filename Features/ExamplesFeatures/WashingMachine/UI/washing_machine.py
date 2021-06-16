@@ -22,6 +22,7 @@ class washing_machine(BotFeature):
                 machine.name = name
                 machine.user = None
                 machine.mode = None
+                machine.remind = False
                 machine.end_time = datetime.datetime.now()
                 machine.save()
 
