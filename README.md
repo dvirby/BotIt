@@ -1,6 +1,6 @@
 <p align="center"><img src="./other/logo.png"></p>
 
-# Build your first bot with `Bot it API 🤖`
+# Build your first bot with `Botit API 🤖`
 
 ## Why choose Bot it?
 
