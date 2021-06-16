@@ -3,7 +3,7 @@ from APIs.ExternalAPIs import *
 from APIs.OtherAPIs.DatabaseRelated import User
 from BotFramework.Activity import FormActivity
 from APIs.OtherAPIs.DatabaseRelated.Group.create_group_form import CreateGroupForm
-from APIs.OtherAPIs.DatabaseRelated.Group import groups
+from APIs.OtherAPIs.DatabaseRelated.Group import groups_api
 
 class CreateNewGroup(BotFeature):
 
@@ -23,7 +23,7 @@ class CreateNewGroup(BotFeature):
                          self.createGroupWithForm).draw()
 
     def createGroupWithForm(self, session: Session, form_activity: FormActivity, form: CreateGroupForm):
-        groups.create_new_group(str(form.groupName.value), str(form.description.value), form.participants.value, [session.user])
+        groups_api.create_new_group(str(form.groupName.value), str(form.description.value), form.participants.value, [session.user])
         self.ui.create_text_view(session, "Group successfully created!").draw()
 
 

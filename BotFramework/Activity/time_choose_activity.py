@@ -20,14 +20,14 @@ class TimeChooseView(Activity):
     will have to close it yourself.
     """
 
-    TIME_CHOOSE = "הקלד זמן"
-    TIME_CHOSEN = "נבחר הזמן"
+    TIME_CHOOSE = "select time"
+    TIME_CHOSEN = "time selected"
     TIME_TEMPLATE = "%s%s:%s%s"
     EMPTY_BUTTON_TEXT = " "
     EMPTY_CHAR = "X"
-    SAVE = "שמור"
-    EDIT = "ערוך"
-    NOT_RIGHT_TIME_ERROR = "שגיאה פורמט זמן לא תקין"
+    SAVE = "save"
+    EDIT = "edit"
+    NOT_RIGHT_TIME_ERROR = "format is invalid"
 
     def __init__(self, view_container: ViewContainer, choose_callback: Callable[[TimeChooseView, Session, datetime], None], chosen_time: datetime = None):
         """

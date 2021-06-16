@@ -59,5 +59,5 @@ class ARP(BotFeature):
         return []
 
     def is_authorized(self, user: User) -> bool:
-        return "מתלם" in user.role
+        return "reg_user" in user.role
 

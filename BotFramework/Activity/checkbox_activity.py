@@ -21,7 +21,7 @@ class CheckBoxActivity(Activity):
                  options: [str],
                  submit_callback: Callable[[Session, List[str]], None],
                  extra_callbacks: Dict[str, Callable[[Session, str], None]] = {},
-                 title: str = 'בחר מהאפשרויות:',
+                 title: str = 'choose from the options:',
                  max_buttons: int = 6,
                  max_selections: int = 0,
                  min_selections: int = 0,
@@ -73,9 +73,9 @@ class CheckBoxActivity(Activity):
     def _get_title(self):
         title = self.title
         if not self.simple_choice:
-            title += '\n\n' + 'נבחרו: ' + str(len(self.select_stack))
+            title += '\n\n' + 'you chose: ' + str(len(self.select_stack))
             if self.max_selections > 0:
-                title += " מתוך " + str(self.max_selections)
+                title += " from " + str(self.max_selections)
         return title
 
     def update(self, session: Session, options: [str] = None,

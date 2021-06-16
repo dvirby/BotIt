@@ -16,7 +16,7 @@ class StringsChooseActivity(Activity):
     def __init__(self, view_container: ViewContainer,
                  all_options: [str],
                  submit_callback: Callable[[Session, list], None],
-                 get_input_text: str = 'הקלד בחירות, מופרדות בפסיק:',
+                 get_input_text: str = 'insert name with `,` separation:',
                  max_buttons: int = 6,
                  separator: str=','):
         """
@@ -38,9 +38,9 @@ class StringsChooseActivity(Activity):
         self.strings_chosen = []
         self.buttons = {}
         self.submit_buttons = [
-            self.view_container.ui.create_button_view("אפס", self._reset),
-            self.view_container.ui.create_button_view("הוסף עוד", self._continue),
-            self.view_container.ui.create_button_view("סיים", self._submit)
+            self.view_container.ui.create_button_view("reset", self._reset),
+            self.view_container.ui.create_button_view("continue", self._continue),
+            self.view_container.ui.create_button_view("submit", self._submit)
         ]
         self.button_view: ButtonMatrixView = None
         self._reset(view_container.session, from_init=True)
@@ -87,13 +87,13 @@ class StringsChooseActivity(Activity):
         for button in self.buttons.values():
             matrix.append([button[1]])
         matrix.append(self.submit_buttons)
-        self.button_view.update("סמן את האפשרויות המתאימות:", matrix)
+        self.button_view.update("choose from options:", matrix)
 
     def _continue(self, session: Session):
         for key in self.buttons.keys():
             if self.buttons[key][0] and not key in self.strings_chosen:
                 self.strings_chosen.append(key)
-        self.view_container.ui.create_text_view(session, 'עד כה נבחרו: '+', '.join(self.strings_chosen)).draw()
+        self.view_container.ui.create_text_view(session, 'you choose: '+', '.join(self.strings_chosen)).draw()
         self.view_container.ui.create_text_view(session, self.get_input_text).draw()
         self.view_container.ui.get_text(session, self._got_input)
 
@@ -106,7 +106,7 @@ class StringsChooseActivity(Activity):
     def _reset(self, session: Session, from_init: bool = False):
         self.strings_chosen = []
         if not from_init:
-            self.view_container.ui.create_text_view(session, 'הבחירות אופסו').draw()
+            self.view_container.ui.create_text_view(session, 'reset').draw()
         self.view_container.ui.create_text_view(session, self.get_input_text).draw()
         self.view_container.ui.get_text(session, self._got_input)
 
@@ -115,7 +115,7 @@ class StringsChooseActivity(Activity):
         inputs = input.split(self.separator)
         self.button_view: ButtonMatrixView = self.view_container.ui.create_button_matrix_view(
             session,
-            "סמן את האפשרויות הנכונות:",
+            "choose from options:",
             self._get_button_matrix(inputs)
         )
         self.button_view.draw()

@@ -1,10 +1,9 @@
-from BotFramework import UI, Session, View
-from BotFramework.Feature.bot_feature import BotFeature
-from APIs.ExternalAPIs import ScheduledJob
-from APIs.OtherAPIs import User, SecretCodeManager
+from BotFramework import *
+from APIs.ExternalAPIs import *
+from APIs.OtherAPIs import *
 
 
-class Start(BotFeature):
+class URLs(BotFeature):
 
     # init the class and call to super init - The same for every feature
     def __init__(self, ui: UI):
@@ -18,23 +17,10 @@ class Start(BotFeature):
         :param session: Session object
         :return: nothing
         """
-        if 'secret_code' not in session.data:
-            return
+        buttons = [self.ui.create_button_view("skeddy", lambda s: self.ui.clear(session), "https://t.me/skeddy"),
+                   self.ui.create_button_view("gif", lambda s: self.ui.clear(session), "https://dontasktoask.com/")]
+        self.ui.create_button_group_view(session, "URL buttons", buttons).draw()
 
-        secret_code = session.data['secret_code']
-        users = User.objects.filter(secret_code=secret_code)
-        if not (len(users) > 0):
-            raise Exception("No user with that secret code.")
-
-        user: User = users[0]
-        user.telegram_id = session.data['telegram_id']
-        user.secret_code = SecretCodeManager.generate_code()
-        user.save()
-
-        session.feature_name = "start"
-        session.user = user
-        self.ui.summarize_and_close(session, [
-            self.ui.create_text_view(session, f"Welcome {user.name}!\nYou can now use the system.")], prompt_menu=True)
 
     def get_summarize_views(self, session: Session) -> [View]:
         """

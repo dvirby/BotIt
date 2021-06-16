@@ -8,7 +8,7 @@ from BotFramework.Activity.FormActivity.form_activity import FormActivity
 class AddGroupParticipants:
 
     def __init__(self, group):
-        users = UserConstraint.get_users_with_constraint(MachzorConstraint(User.mahzor))
+        users = User.objects
         toAdd = []
         for u in users:
             if u not in group:

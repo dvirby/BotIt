@@ -16,4 +16,6 @@ def main():
 
 
 if __name__ == '__main__':
+    import warnings
+    warnings.filterwarnings("ignore")
     main()

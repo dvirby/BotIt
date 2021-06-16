@@ -15,8 +15,6 @@ class Button:
         self.args = args
         self.kwargs = kwargs
 
-
-
     def __eq__(self, other: Button):
         """Overrides the default implementation"""
         if isinstance(other, Button):
@@ -29,6 +27,3 @@ class Button:
 
     def call_function(self, session: Session):
         self.func_to_call(session, *self.args, **self.kwargs)
-
-
-

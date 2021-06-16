@@ -131,7 +131,6 @@ class GoogleSheets(PooledWorker):
             cells = []
             for row in rows:
                 cells_row = []
-                #print(row)
                 for item in row:
                     bg = item.get("effectiveFormat", {}).get("backgroundColorStyle", {}).get("rgbColor", {})
                     cl = item.get("effectiveFormat", {}).get("textFormat", {}).get("foregroundColorStyle", {}).get(

@@ -9,7 +9,7 @@ class PictureField(Field[File]):
     Field that allows the user to upload an image.
     """
 
-    PICTURE_VALID = "תמונה נקלטה"
+    PICTURE_VALID = "valid picture"
 
     def __init__(self, name: str, msg: str, value: File = None):
         super().__init__(name, value)

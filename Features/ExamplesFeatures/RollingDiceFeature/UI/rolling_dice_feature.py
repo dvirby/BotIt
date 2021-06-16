@@ -20,7 +20,7 @@ class RollingDiceFeature(BotFeature):
         :param session: Session object
         :return: nothing
         """
-        self.ui.create_text_view(session, "כמה קוביות לזרוק? " + f"({MIN_NUM_OF_DICE}-{MAX_NUM_OF_DICE})").draw()
+        self.ui.create_text_view(session, "How many cubes? " + f"({MIN_NUM_OF_DICE}-{MAX_NUM_OF_DICE})").draw()
         self.ui.get_text(session, self.got_num_of_dice)
 
     def got_num_of_dice(self, session: Session, num: str):
@@ -47,7 +47,7 @@ class RollingDiceFeature(BotFeature):
         :param user: the user to test
         :return: True if access should be allowed, false if should be restricted.
         """
-        return "מתלם" in user.role
+        return "reg_user" in user.role
 
     def get_scheduled_jobs(self) -> [ScheduledJob]:
         """

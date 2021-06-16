@@ -26,8 +26,6 @@ class library(BotFeature):
         :param session: Session object
         :return: nothing
         """
-        # buttons = [self.UIbase.create_button_view("ספריית עיון", self.sifreyIun),
-        #            self.UIbase.create_button_view("ספריית לימוד", self.sifreyLimud)]
         buttons = [self.ui.create_button_view("ספריית עיון", self.sifreyIun)]
                    # self.UIbase.create_button_view("ספריית לימוד", self.sifreyLimud)]
 
@@ -60,10 +58,6 @@ class library(BotFeature):
         bookDict = {}
 
         with GoogleSheets.get_instance() as gs:
-            # row = str(gs.get_free_sheet_row(self.SS_ID, "sheet1", self._last_sheet_column))
-            # place_of_data = "A" + row + ":" + 'D' + row
-            # print(place_of_data)
-            print(self.PLACE_OF_DATA)
             data = gs.get_range(self.SS_ID, self.SHEET, self.PLACE_OF_DATA)
             row = 0
             for content in data:
@@ -171,7 +165,7 @@ class library(BotFeature):
         :param user: the user to test
         :return: True if access should be allowed, false if should be restricted.
         """
-        return "מתלם" in user.role
+        return "reg_user" in user.role
 
     def get_scheduled_jobs(self) -> [ScheduledJob]:
         """

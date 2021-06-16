@@ -9,7 +9,7 @@ class Feature(Document):
 	title: str = StringField(max_length=50)
 	command: str = StringField(max_length=50)
 	category: str = StringField(max_length=50)
-	authorized_roles: [str] = ListField(default=["מתלם"])
+	authorized_roles: [str] = ListField(default=["reg_user"])
 
 	def get_constraint(self) -> UserConstraint:
 		"""

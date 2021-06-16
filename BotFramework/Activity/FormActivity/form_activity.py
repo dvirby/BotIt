@@ -95,7 +95,7 @@ class FormActivity(Activity):
         :return:
         """
 
-        self.form.update("%s\n*שגיאה:*\n%s" % (self.form_name, error), self.buttons_grid)
+        self.form.update("%s\n*error:*\n%s" % (self.form_name, error), self.buttons_grid)
         self.error_shown = True
 
     def hide_error(self):

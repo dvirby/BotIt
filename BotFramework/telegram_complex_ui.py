@@ -1,6 +1,5 @@
-from typing import Callable, Type
+from typing import Type
 import telegram
-from telegram import File
 
 from BotFramework.View.telegram_view_container import TelegramViewContainer
 from BotFramework.queued_bot import QueuedBot
@@ -12,7 +11,6 @@ from BotFramework.View.telegram_dice_view import TelegramDiceView
 from BotFramework.View.telegram_image_view import TelegramImageView
 from BotFramework.View.telegram_location_view import TelegramLocationView
 from BotFramework.View.telegram_text_view import TelegramTextView
-from BotFramework.session import Session
 from BotFramework.crash_logger import log_all_exceptions
 from BotFramework.session import Session
 from BotFramework.bot_logger import BotLogger
@@ -180,7 +178,6 @@ class TelegramUI(UI):
             user = update.effective_user
         else:
             try:
-                print(update.effective_user.id)
                 user = self.user_type.get_by_telegram_id(update.effective_user.id)
             except:
                 print("Text received from a user that did not log in. Ignoring.")
@@ -191,13 +188,13 @@ class TelegramUI(UI):
         # him, just return and ignore.
         if user not in stack:
             stack[user] = []
-            print("Photo received from a user that the bot was not expecting a photo from. Ignoring.")
+            # print("Photo received from a user that the bot was not expecting a photo from. Ignoring.")
             return False
         # Check if the stack of the user is empty. If this is the case, the bot is not expecing a message from him,
         # just return and ignore.
-        if len(stack[user]) == 0:
-            print("Photo received from a user that the bot was not expecting a photo from. Ignoring.")
-            return False
+        # if len(stack[user]) == 0:
+        #     print("Photo received from a user that the bot was not expecting a photo from. Ignoring.")
+        #     return False
         return True
 
     def create_handlers(self):

@@ -20,7 +20,7 @@ class User(Document):
     phone_number: str = StringField()
     telegram_id: int = LongField()
     birthday: datetime.date = DateField()
-    role: [str] = ListField(default=["מתלם"])
+    role: [str] = ListField(default=["reg_user"])
     secret_code: str = StringField()
 
     @staticmethod
@@ -99,15 +99,11 @@ class User(Document):
         return hash(self.id)
 
 
-if __name__ == "__main__":
-    from settings import load_settings
-    from APIs.System import Vault
-    load_settings()
-    Vault.get_vault().connect_to_db()
-    u = User()
-    u.email = "nadav.mihov@gmail.com"
-    u.name = "nadav"
-    u.role = ["מתלם","חנתר"]
-    u.telegram_id = 2134546368
-    u.save()
-    print(User.objects)
+# if __name__ == "__main__":
+#     from settings import load_settings
+#     from APIs.System import Vault
+#     load_settings()
+#     Vault.get_vault().connect_to_db()
+#     u = User()
+#     u.save()
+#     print(User.objects)

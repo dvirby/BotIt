@@ -66,7 +66,7 @@ class Change_Profile(BotFeature):
         :param user: the user to test
         :return: True if access should be allowed, false if should be restricted.
         """
-        return "מתלם" in user.role
+        return "reg_user" in user.role
 
     def get_scheduled_jobs(self) -> [ScheduledJob]:
         """

@@ -25,7 +25,7 @@ class FeatureFinderUI(BotFeature):
         :param session: Session object
         :return: nothing
         """
-        self.ui.create_text_view(session, 'מה לחפש?').draw()
+        self.ui.create_text_view(session, 'which feature are you looking for?').draw()
         self.ui.get_text(session, self.got_feature_name)
 
     def got_feature_name(self, session: Session, feature_name: str):
@@ -75,7 +75,7 @@ class FeatureFinderUI(BotFeature):
         :param user: the user to test
         :return: True if access should be allowed, false if should be restricted.
         """
-        return "מתלם" in user.role
+        return "reg_user" in user.role
 
     def get_scheduled_jobs(self) -> [ScheduledJob]:
         """

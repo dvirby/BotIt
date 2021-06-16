@@ -70,20 +70,6 @@ class SecretCodeManager:
         mail_client.send_mail(user.email, "TalpiBot Secret Code", msg)
 
 
-def test_class():
-
-    non_codes = User.objects.filter(name="שירי מזרחי")
-    SecretCodeManager.generate_codes()
-    shiri = non_codes[0]
-    print(shiri.name)
-    print(SecretCodeManager.genereate_secret_url("TalpiBot", shiri.secret_code))
-
-    # connect_db_readonly_access()
-    # users = User.objects.filter(name='דוד אורן')
-    # print(SecretCodeManager.genereate_secret_url("TalpiBot", users[0].secret_code))
-    # print(SecretCodeManager.genereate_secret_url("TalpiBot", users[0].secret_code))
-    # SecretCodeManager.send_url_to_users(users, "TalpiBot")
-
 
 if __name__ == '__main__':
     from settings import load_settings
@@ -91,4 +77,3 @@ if __name__ == '__main__':
 
     load_settings()
     Vault.get_vault().connect_to_db()
-    test_class()

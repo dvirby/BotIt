@@ -26,7 +26,7 @@ class DateChooseView(Activity):
     NO_DAY_BUTTON_TEXT = " "
 
     def __init__(self, view_container: ViewContainer, choose_callback: Callable[[DateChooseView, Session, date], None],
-                 chosen_date: date = None, title: str = "בחר תאריך"):
+                 chosen_date: date = None, title: str = "choose date"):
         """
         Initializes a new DateChooseView.
         :param UIbase: The UI to send throught

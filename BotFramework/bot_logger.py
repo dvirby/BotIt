@@ -78,10 +78,6 @@ class CallerInfo:
     def get_caller_function():
         return inspect.stack()[4].function
 
-# if not supports_color():
-#     BColors.disable()
-#     print(
-#         "If you want to see colors in Pycharm, go to Run | Edit Configurations... | Configuration | Emulate terminal in output console")
 
 
 class LoggingType(Enum):

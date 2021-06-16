@@ -6,7 +6,6 @@ from APIs.System import BotItLogger
 from APIs.OtherAPIs import User
 from Features.SystemFeatures.HierarchicalMenu.Code.menu_node import MenuNode
 
-
 FEATURES_HOME_DIR = os.path.abspath('Features')
 SESSION_VAR_LAST_VIEW = "last_view"
 
@@ -57,14 +56,17 @@ class HierarchicalMenu(BotFeature):
         buttons = sorted(buttons, key=lambda button: button.title)
 
         if len(buttons) == 0:
-            self.ui.create_text_view(session, "הפיצ׳רים בקטגוריה זו עדיין בבנייה או שאין לך הרשאות לצפות בהם.").draw()
+            self.ui.create_text_view(session,
+                                     "הפיצ׳רים בקטגוריה זו עדיין בבנייה או שאין לך הרשאות לצפות בהם.").draw()
 
         if node.parent is not None:
             buttons.append(
-                self.ui.create_button_view("🔙", lambda new_session: self.show_menu(new_session, node.parent))
+                self.ui.create_button_view("🔙", lambda new_session: self.show_menu(new_session,
+                                                                                    node.parent))
             )
 
-        new_message = self.ui.create_button_group_view(session, node.display_name + " menu"+ ":", buttons)
+        new_message = self.ui.create_button_group_view(session, node.display_name + " menu" + ":",
+                                                       buttons)
         if SESSION_VAR_LAST_VIEW not in session.data:
             new_message.draw()
             session.data[SESSION_VAR_LAST_VIEW] = new_message
@@ -93,7 +95,8 @@ class HierarchicalMenu(BotFeature):
 
             elif inner_node.type == FeatureType.FEATURE_CATEGORY:
                 button_title = "🗂 " + button_title
-                button_action = lambda _session, _inner_node=inner_node: self.show_menu(_session, _inner_node)
+                button_action = lambda _session, _inner_node=inner_node: self.show_menu(_session,
+                                                                                        _inner_node)
 
             buttons.append(self.ui.create_button_view(title=button_title, callback=button_action))
 
@@ -137,7 +140,7 @@ class HierarchicalMenu(BotFeature):
         :param user: the user to test
         :return: True if access should be allowed, false if should be restricted.
         """
-        return "מתלם" in user.role
+        return "reg_user" in user.role
 
     def get_scheduled_jobs(self) -> [ScheduledJob]:
         """

@@ -36,7 +36,7 @@ class ClosestNameActivity(Activity):
 
         self.button_view: ButtonMatrixView = self.view_container.ui.create_button_matrix_view(
             view_container.session,
-            "בחר באפשרות שאתה מחפש:",
+            "choose from the options:",
             self._get_button_matrix()
         )
 
@@ -61,9 +61,9 @@ class ClosestNameActivity(Activity):
             matrix.append([self.view_container.ui.create_button_view(key, lambda s, k=key: self.choose_callback(s, self, self.data[k]))])
 
         if self.try_again is not None:
-            matrix.append([self.view_container.ui.create_button_view("נסה שנית", self.try_again)])
+            matrix.append([self.view_container.ui.create_button_view("try again", self.try_again)])
 
         if self.cancel is not None:
-            matrix.append([self.view_container.ui.create_button_view("בטל", lambda s: self.cancel(s, self))])
+            matrix.append([self.view_container.ui.create_button_view("cancel", lambda s: self.cancel(s, self))])
 
         return matrix
