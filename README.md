@@ -30,11 +30,11 @@ Use them to learn about the API and other tools !
 Each feature conatin another ability to help you learn about them
 
 ## Some example features that attached:
-### * Libary manager 📚
-### * Reminder ⏰
-### * System to manage washing machines 🧺
-### * Surveys ✔️
-### * Manage Groups 👥
+##### * Libary manager 📚
+##### * Reminder ⏰
+##### * System to manage washing machines 🧺
+##### * Surveys ✔️
+##### * Manage Groups 👥
 
 
 `In a quick look you can see how easy and simple it to write bot with bery strong abilites`
